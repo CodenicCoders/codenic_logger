@@ -3,7 +3,7 @@ import 'package:codenic_logger/src/logger.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart' as logs;
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 class MockFirebaseCrashlytics extends Mock implements FirebaseCrashlytics {}
 
@@ -37,6 +37,9 @@ void main() {
       final exception = Exception();
       final stackTrace = StackTrace.fromString('Sample stack trace');
 
+      when(() => mockFirebaseCrashlytics.recordError(exception, stackTrace,
+          reason: any(named: 'reason'))).thenAnswer((invocation) async {});
+
       // Act
       logger.error(
         message,
@@ -46,11 +49,11 @@ void main() {
       );
 
       // Assert
-      verify(mockFirebaseCrashlytics.recordError(
-        exception,
-        stackTrace,
-        reason: 'Test message – Test details {foo: 1}',
-      )).called(1);
+      verify(() => mockFirebaseCrashlytics.recordError(
+            exception,
+            stackTrace,
+            reason: 'Test message – Test details {foo: 1}',
+          )).called(1);
     },
   );
 }

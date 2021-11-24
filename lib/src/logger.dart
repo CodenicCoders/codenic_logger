@@ -4,17 +4,11 @@ import 'package:logger/logger.dart' as logs;
 
 part 'message_log.dart';
 
-/// Logs messages in the debug console.
 class Logger {
   Logger({
     logs.Logger? logger,
   }) : _logger = logger ?? logs.Logger(printer: logs.PrettyPrinter());
 
-  /// An instance of [logs.Logger].
-  ///
-  /// The default logger will only log events in debug mode.
-  ///
-  /// See https://pub.dev/packages/logger.
   final logs.Logger _logger;
 
   @mustCallSuper

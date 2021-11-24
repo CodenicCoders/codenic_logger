@@ -1,7 +1,7 @@
 import 'package:codenic_logger/src/logger.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart' as logs;
-import 'package:mockito/mockito.dart';
+import 'package:mocktail/mocktail.dart';
 
 class MockLogger extends Mock implements logs.Logger {}
 
@@ -26,7 +26,7 @@ void main() {
       logger.info(message);
 
       // Assert
-      verify(mockLogger.i('Test message')).called(1);
+      verify(() => mockLogger.i('Test message')).called(1);
     },
   );
 
@@ -41,7 +41,7 @@ void main() {
       logger.info(message);
 
       // Assert
-      verify(mockLogger.i('Test message – Test details')).called(1);
+      verify(() => mockLogger.i('Test message – Test details')).called(1);
     },
   );
 
@@ -57,7 +57,8 @@ void main() {
       logger.info(message, data: data);
 
       // Assert
-      verify(mockLogger.i('Test message – Test details {foo: 1}')).called(1);
+      verify(() => mockLogger.i('Test message – Test details {foo: 1}'))
+          .called(1);
     },
   );
 }
