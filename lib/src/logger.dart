@@ -1,6 +1,5 @@
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/material.dart';
 import 'package:logger/logger.dart' as logs;
+import 'package:meta/meta.dart';
 
 part 'message_log.dart';
 
@@ -38,8 +37,6 @@ class Logger {
   }) =>
       _logger.w(formatMessageData(message, data), error, stackTrace);
 
-  /// Logs an error in the debug console and submits it to
-  /// [FirebaseCrashlytics].
   @mustCallSuper
   void error(
     MessageLog message, {

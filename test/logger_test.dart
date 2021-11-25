@@ -1,7 +1,7 @@
 import 'package:codenic_logger/src/logger.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:logger/logger.dart' as logs;
 import 'package:mocktail/mocktail.dart';
+import 'package:test/test.dart';
 
 class MockLogger extends Mock implements logs.Logger {}
 
