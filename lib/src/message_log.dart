@@ -2,7 +2,16 @@ part of 'codenic_logger.dart';
 
 /// A message container for [CodenicLogger].
 class MessageLog {
-  const MessageLog({required this.message, this.details});
+  const MessageLog({
+    required this.message,
+    this.details,
+  });
+
+  factory MessageLog.fromJson(String source) =>
+      MessageLog.fromMap(json.decode(source));
+
+  factory MessageLog.fromMap(Map<String, dynamic> map) =>
+      MessageLog(message: map['message'], details: map['details']);
 
   /// The general log message.
   final String message;
@@ -13,12 +22,11 @@ class MessageLog {
   MessageLog copyWith({
     String? message,
     String? details,
-  }) {
-    return MessageLog(
-      message: message ?? this.message,
-      details: details ?? this.details,
-    );
-  }
+  }) =>
+      MessageLog(
+        message: message ?? this.message,
+        details: details ?? this.details,
+      );
 
   /// Returned message format:
   ///
@@ -28,5 +36,9 @@ class MessageLog {
   /// MessageLog(message: 'Hello', details: 'world') => Hello – world
   /// ```
   @override
-  String toString() => details != null ? '$message – $details' : message;
+  String toString() => 'MessageLog(message: $message, details: $details)';
+
+  Map<String, dynamic> toMap() => {'message': message, 'details': details};
+
+  String toJson() => json.encode(toMap());
 }

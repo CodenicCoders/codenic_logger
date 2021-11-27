@@ -15,42 +15,24 @@ void main() {
 }
 
 void verbose() {
-  try {
-    throw Exception('Test exception');
-  } catch (exception, stackTrace) {
-    codenicLogger.verbose(
-      messageLog.copyWith(details: 'verbose'),
-      data: {'foo': 'bar'},
-      error: exception,
-      stackTrace: stackTrace,
-    );
-  }
+  codenicLogger.verbose(
+    messageLog.copyWith(details: 'verbose'),
+    data: {'foo': 'bar'},
+  );
 }
 
 void debug() {
-  try {
-    throw Exception('Test exception');
-  } catch (exception, stackTrace) {
-    codenicLogger.debug(
-      messageLog.copyWith(details: 'debug'),
-      data: {'foo': 'bar'},
-      error: exception,
-      stackTrace: stackTrace,
-    );
-  }
+  codenicLogger.debug(
+    messageLog.copyWith(details: 'debug'),
+    data: {'foo': 'bar'},
+  );
 }
 
 void info() {
-  try {
-    throw Exception('Test exception');
-  } catch (exception, stackTrace) {
-    codenicLogger.info(
-      messageLog.copyWith(details: 'info'),
-      data: {'foo': 'bar'},
-      error: exception,
-      stackTrace: stackTrace,
-    );
-  }
+  codenicLogger.info(
+    messageLog.copyWith(details: 'info'),
+    data: {'foo': 'bar'},
+  );
 }
 
 void warn() {
