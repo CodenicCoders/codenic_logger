@@ -1,5 +1,5 @@
 name: codenic_logger
-description: A detailed logger with support for Firebase Crashlytics.
+description: An extended logger for providing detailed log messages.
 version: 0.1.0
 homepage: https://github.com/CodenicCoders/codenic_logger
 

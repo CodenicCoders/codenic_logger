@@ -1,23 +1,25 @@
 import 'package:codenic_logger/codenic_logger.dart';
 
-final logger = Logger();
+final codenicLogger = CodenicLogger();
 const messageLog = MessageLog(message: 'Sample message');
 
 void main() {
   // To run, type `dart --enable-asserts example/main.dart`.
 
-  info();
+  verbose();
   debug();
+  info();
   warn();
   error();
+  wtf();
 }
 
-void info() {
+void verbose() {
   try {
     throw Exception('Test exception');
   } catch (exception, stackTrace) {
-    logger.info(
-      messageLog.copyWith(details: 'A debug log'),
+    codenicLogger.verbose(
+      messageLog.copyWith(details: 'verbose'),
       data: {'foo': 'bar'},
       error: exception,
       stackTrace: stackTrace,
@@ -29,8 +31,21 @@ void debug() {
   try {
     throw Exception('Test exception');
   } catch (exception, stackTrace) {
-    logger.debug(
-      messageLog.copyWith(details: 'A debug log'),
+    codenicLogger.debug(
+      messageLog.copyWith(details: 'debug'),
+      data: {'foo': 'bar'},
+      error: exception,
+      stackTrace: stackTrace,
+    );
+  }
+}
+
+void info() {
+  try {
+    throw Exception('Test exception');
+  } catch (exception, stackTrace) {
+    codenicLogger.info(
+      messageLog.copyWith(details: 'info'),
       data: {'foo': 'bar'},
       error: exception,
       stackTrace: stackTrace,
@@ -42,8 +57,8 @@ void warn() {
   try {
     throw Exception('Test exception');
   } catch (exception, stackTrace) {
-    logger.warn(
-      messageLog.copyWith(details: 'A debug log'),
+    codenicLogger.warn(
+      messageLog.copyWith(details: 'warn'),
       data: {'foo': 'bar'},
       error: exception,
       stackTrace: stackTrace,
@@ -55,8 +70,21 @@ void error() {
   try {
     throw Exception('Test exception');
   } catch (exception, stackTrace) {
-    logger.error(
-      messageLog.copyWith(details: 'A debug log'),
+    codenicLogger.error(
+      messageLog.copyWith(details: 'error'),
+      data: {'foo': 'bar'},
+      error: exception,
+      stackTrace: stackTrace,
+    );
+  }
+}
+
+void wtf() {
+  try {
+    throw Exception('Test exception');
+  } catch (exception, stackTrace) {
+    codenicLogger.wtf(
+      messageLog.copyWith(details: 'What the f---'),
       data: {'foo': 'bar'},
       error: exception,
       stackTrace: stackTrace,

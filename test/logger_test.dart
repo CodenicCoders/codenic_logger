@@ -1,18 +1,18 @@
-import 'package:codenic_logger/src/logger.dart';
-import 'package:logger/logger.dart' as logs;
+import 'package:codenic_logger/src/codenic_logger.dart';
+import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
-class MockLogger extends Mock implements logs.Logger {}
+class MockLogger extends Mock implements Logger {}
 
 void main() {
   late MockLogger mockLogger;
-  late Logger logger;
+  late CodenicLogger logger;
 
   setUp(
     () {
       mockLogger = MockLogger();
-      logger = Logger(logger: mockLogger);
+      logger = CodenicLogger(logger: mockLogger);
     },
   );
 

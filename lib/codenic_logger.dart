@@ -1,3 +1,3 @@
 library codenic_logger;
 
-export './src/logger.dart';
+export 'src/codenic_logger.dart';

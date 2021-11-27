@@ -3,12 +3,24 @@ import 'package:meta/meta.dart';
 
 part 'message_log.dart';
 
-class Logger {
-  Logger({
+class CodenicLogger {
+  CodenicLogger({
     logs.Logger? logger,
   }) : _logger = logger ?? logs.Logger(printer: logs.PrettyPrinter());
 
   final logs.Logger _logger;
+
+  String formatMessageData(MessageLog message, data) =>
+      data != null ? '$message $data' : '$message';
+
+  @mustCallSuper
+  void verbose(
+    MessageLog message, {
+    Map<String, dynamic>? data,
+    dynamic error,
+    StackTrace? stackTrace,
+  }) =>
+      _logger.v(formatMessageData(message, data), error, stackTrace);
 
   @mustCallSuper
   void debug(
@@ -46,6 +58,12 @@ class Logger {
   }) =>
       _logger.e(formatMessageData(message, data), error, stackTrace);
 
-  String formatMessageData(MessageLog message, data) =>
-      data != null ? '$message $data' : '$message';
+  @mustCallSuper
+  void wtf(
+    MessageLog message, {
+    Map<String, dynamic>? data,
+    dynamic error,
+    StackTrace? stackTrace,
+  }) =>
+      _logger.wtf(formatMessageData(message, data), error, stackTrace);
 }

@@ -1,6 +1,6 @@
-part of 'logger.dart';
+part of 'codenic_logger.dart';
 
-/// A message container for [Logger].
+/// A message container for [CodenicLogger].
 class MessageLog {
   const MessageLog({required this.message, this.details});
 
