@@ -32,9 +32,9 @@ jobs:
           test_coverage
           
       - name: Check Code Coverage
-        uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
+        uses: VeryGoodOpenSource/very_good_coverage@v1
         with:
-          path: packages/bloc/coverage/lcov.info
+          path: packages/codenic_logger/coverage/lcov.info
 
   pana:
     runs-on: ubuntu-latest
