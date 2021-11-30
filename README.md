@@ -2,15 +2,13 @@ A logger for providing structured and detailed log messages.
 
 > This uses the [logger](https://github.com/leisim/logger) package to produce log messages.
 
-<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/
-assets/sample_1.webp?raw=true" alt="Sample detailed log messages" width=620/>
+<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_1.webp?raw=true" alt="Sample detailed log messages" width=620/>
 
 ## Features
 
 Use this plugin in your app to:
 
-- Log messages on multiple log levels – verbose, debug, info, warning, error
-  and wtf.
+- Log messages on multiple log levels – verbose, debug, info, warning, error and wtf.
 - Structurally add log message, details and data.
 - Automatically add a user ID to all log data upon logging.
 
@@ -31,13 +29,13 @@ codenicLogger.info(messageLog, data: data);
 
 This section has examples of code for the following tasks:
 
-- [Logging on different log levels](#logging-on-different-log-levels)
+- [Logging on different log levels](#logging-with-different-log-levels)
 - [Logging an exception](#logging-an-exception)
 - [Setting a user ID](#setting-a-user-id)
 - [Customizing the logger](#customizing-the-log-output)
 - [Sample Integration: Firebase Crashlytics](#sample-integration-firebase-crashlytics)
 
-### Logging on different log levels
+### Logging with different log levels
 
 ```dart
 final codenicLogger = CodenicLogger();
@@ -69,8 +67,7 @@ try {
 }
 ```
 
-<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/
-assets/sample_2.webp?raw=true" alt="Sample detailed log messages" width=620/>
+<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_2.webp?raw=true" alt="Sample detailed log messages" width=620/>
 
 ### Setting a user ID
 
@@ -81,8 +78,7 @@ codenicLogger.userId = 'sample-uid';
 codenicLogger.info(messageLog, data: data);
 ```
 
-<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/
-assets/sample_3.webp?raw=true" alt="Sample detailed log messages" width=620/>
+<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_3.webp?raw=true" alt="Sample detailed log messages" width=620/>
 
 To remove the user ID, simply set it back to `null`:
 ```dart
@@ -140,5 +136,4 @@ class FirebaseLogger extends CodenicLogger {
 ## Additional information
 
 ### Contributing to this plugin 
-If you would like to contribute to the package, check out the 
-[contribution guide](https://github.com/CodenicCoders/codenic_logger/blob/master/CONTRIBUTING.md).
+If you would like to contribute to the package, check out the [contribution guide](https://github.com/CodenicCoders/codenic_logger/blob/master/CONTRIBUTING.md).
