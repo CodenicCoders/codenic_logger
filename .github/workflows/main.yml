@@ -2,7 +2,7 @@ name: main
 
 on:
   push:
-    branches: [ master ]
+  
   pull_request:
     branches: [ master ]
 
@@ -31,13 +31,13 @@ jobs:
           export PATH=$PATH:$HOME/.pub-cache/bin
           test_coverage
           
-      - name: Check Code Coverage
-        uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
-        
       - name: Upload Coverage to Codecov
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
+          
+      - name: Check Code Coverage
+        uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
 
   pana:
     runs-on: ubuntu-latest
