@@ -22,8 +22,9 @@ Before creating a pull request please:
 6. If you've changed the public API, make sure to update/add documentation.
 7. Format your code (`dart format .`).
 8. Analyze your code (`dart analyze --fatal-infos --fatal-warnings .`).
-9. Create the Pull Request.
-10. Verify that all status checks are passing.
+9. Verify Pub Score (`pana .`).
+10. Create the Pull Request.
+11. Verify that all status checks are passing.
 
 While the prerequisites above must be satisfied prior to having your pull request reviewed, the reviewer(s) may ask you to complete additional design work, tests, or other changes before your pull request can be ultimately accepted.
 
