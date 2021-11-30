@@ -1,39 +1,144 @@
-<!-- 
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+A logger for providing structured and detailed log messages.
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages). 
+> This uses the [logger](https://github.com/leisim/logger) package to produce log messages.
 
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages). 
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/
+assets/sample_1.webp?raw=true" alt="Sample detailed log messages" width=620/>
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Use this plugin in your app to:
+
+- Log messages on multiple log levels – verbose, debug, info, warning, error
+  and wtf.
+- Structurally add log message, details and data.
+- Automatically add a user ID to all log data upon logging.
 
 ## Getting started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To get started, just create a Codenic logger instance:
+
+```dart
+final codenicLogger = CodenicLogger();
+
+const messageLog = MessageLog(message: 'Save age failed', details: 'No internet');
+const data = { 'age': 24 };
+
+codenicLogger.info(messageLog, data: data);
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder. 
+This section has examples of code for the following tasks:
+
+- [Logging on different log levels](#logging-on-different-log-levels)
+- [Logging an exception](#logging-an-exception)
+- [Setting a user ID](#setting-a-user-id)
+- [Customizing the logger](#customizing-the-log-output)
+- [Sample Integration: Firebase Crashlytics](#sample-integration-firebase-crashlytics)
+
+### Logging on different log levels
 
 ```dart
-const like = 'sample';
+final codenicLogger = CodenicLogger();
+
+const messageLog = MessageLog(message: 'Sample message');
+
+const data = { 'foo': false, 'lorep': 'ipsum' };
+
+codenicLogger.verbose(messageLog, data: data);
+codenicLogger.debug(messageLog, data: data);
+codenicLogger.info(messageLog, data: data);
+codenicLogger.warn(messageLog, data: data);
+codenicLogger.error(messageLog, data: data);
+codenicLogger.wtf(messageLog, data: data);
+```
+
+### Logging an exception
+
+```dart
+try {
+    throw Exception('Test exception');
+} catch (exception, stackTrace) {
+  codenicLogger.error(
+    messageLog.copyWith(details: 'error'),
+    data: {'foo': false, 'lorep': 'ipsum'},
+    error: exception,
+    stackTrace: stackTrace,
+  );
+}
+```
+
+<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/
+assets/sample_2.webp?raw=true" alt="Sample detailed log messages" width=620/>
+
+### Setting a user ID
+
+When a user ID is provided, it will automatically be included in the log data.
+
+```dart
+codenicLogger.userId = 'sample-uid';
+codenicLogger.info(messageLog, data: data);
+```
+
+<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/
+assets/sample_3.webp?raw=true" alt="Sample detailed log messages" width=620/>
+
+To remove the user ID, simply set it back to `null`:
+```dart
+codenic.userId = null;
+```
+
+### Customizing the log output
+To customize the log output, provide a custom [logger](https://github.com/leisim/logger) instance:
+
+```dart
+final logger = Logger(
+  printer: PrettyPrinter(
+    methodCount: 2, // number of method calls to be displayed
+    errorMethodCount: 8, // number of method calls if stacktrace is provided
+    lineLength: 120, // width of the output
+    colors: true, // Colorful log messages
+    printEmojis: true, // Print an emoji for each log message
+    printTime: false // Should each log print contain a timestamp
+  ),
+);
+
+final codenicLogger = CodenicLogger(logger: logger);
+```
+
+For more info, visit the [logger](https://github.com/leisim/logger) package.
+
+### Sample Integration: Firebase Crashlytics
+
+```dart
+class FirebaseLogger extends CodenicLogger {
+  @override
+  set userId(String? _userId) {
+    super.userId = _userId;
+    FirebaseCrashlytics.instance.setUserIdentifier(_userId ?? '');
+  }
+
+  @override
+  void error(
+    MessageLog message, {
+    Map<String, dynamic>? data,
+    error,
+    StackTrace? stackTrace,
+  }) {
+    super.error(message, data: data, error: error, stackTrace: stackTrace);
+
+    FirebaseCrashlytics.instance.recordError(
+      error,
+      stackTrace,
+      reason: formatMessageData(message, data),
+    );
+  }
+}
 ```
 
 ## Additional information
 
-TODO: Tell users more about the package: where to find more information, how to 
-contribute to the package, how to file issues, what response they can expect 
-from the package authors, and more.
+### Contributing to this plugin 
+If you would like to contribute to the package, check out the 
+[contribution guide](https://github.com/CodenicCoders/codenic_logger/blob/master/CONTRIBUTING.md).

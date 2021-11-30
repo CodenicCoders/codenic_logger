@@ -17,9 +17,9 @@ void main() {
 
 void verboseWithUserId() {
   codenicLogger.userId = 'sample-uid';
-  codenicLogger.verbose(
+  codenicLogger.info(
     messageLog.copyWith(details: 'verbose'),
-    data: {'foo': 'bar'},
+    data: {'foo': false, 'lorep': 'ipsum'},
   );
   codenicLogger.userId = null;
 }
@@ -27,21 +27,21 @@ void verboseWithUserId() {
 void verbose() {
   codenicLogger.verbose(
     messageLog.copyWith(details: 'verbose'),
-    data: {'foo': 'bar'},
+    data: {'foo': false, 'lorep': 'ipsum'},
   );
 }
 
 void debug() {
   codenicLogger.debug(
     messageLog.copyWith(details: 'debug'),
-    data: {'foo': 'bar'},
+    data: {'foo': false, 'lorep': 'ipsum'},
   );
 }
 
 void info() {
   codenicLogger.info(
     messageLog.copyWith(details: 'info'),
-    data: {'foo': 'bar'},
+    data: {'foo': false, 'lorep': 'ipsum'},
   );
 }
 
@@ -51,7 +51,7 @@ void warn() {
   } catch (exception, stackTrace) {
     codenicLogger.warn(
       messageLog.copyWith(details: 'warn'),
-      data: {'foo': 'bar'},
+      data: {'foo': false, 'lorep': 'ipsum'},
       error: exception,
       stackTrace: stackTrace,
     );
@@ -64,7 +64,7 @@ void error() {
   } catch (exception, stackTrace) {
     codenicLogger.error(
       messageLog.copyWith(details: 'error'),
-      data: {'foo': 'bar'},
+      data: {'foo': false, 'lorep': 'ipsum'},
       error: exception,
       stackTrace: stackTrace,
     );
@@ -77,7 +77,7 @@ void wtf() {
   } catch (exception, stackTrace) {
     codenicLogger.wtf(
       messageLog.copyWith(details: 'What the f---'),
-      data: {'foo': 'bar'},
+      data: {'foo': false, 'lorep': 'ipsum'},
       error: exception,
       stackTrace: stackTrace,
     );
