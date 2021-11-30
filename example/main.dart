@@ -6,12 +6,22 @@ const messageLog = MessageLog(message: 'Sample message');
 void main() {
   // To run, type `dart --enable-asserts example/main.dart`.
 
+  verboseWithUserId();
   verbose();
   debug();
   info();
   warn();
   error();
   wtf();
+}
+
+void verboseWithUserId() {
+  codenicLogger.userId = 'sample-uid';
+  codenicLogger.verbose(
+    messageLog.copyWith(details: 'verbose'),
+    data: {'foo': 'bar'},
+  );
+  codenicLogger.userId = null;
 }
 
 void verbose() {

@@ -1,6 +1,5 @@
-part of 'codenic_logger.dart';
+import 'dart:convert';
 
-/// A message container for [CodenicLogger].
 class MessageLog {
   const MessageLog({
     required this.message,
@@ -36,7 +35,7 @@ class MessageLog {
   /// MessageLog(message: 'Hello', details: 'world') => Hello – world
   /// ```
   @override
-  String toString() => 'MessageLog(message: $message, details: $details)';
+  String toString() => '$message${details != null ? ' – $details' : ''}';
 
   Map<String, dynamic> toMap() => {'message': message, 'details': details};
 
