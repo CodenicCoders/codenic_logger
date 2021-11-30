@@ -15,13 +15,13 @@ If you’re only fixing a bug, it’s fine to submit a pull request right away b
 Before creating a pull request please:
 
 1. Fork the repository and create your branch from `master`.
-2. Install all dependencies (`flutter packages get` or `pub get`).
+2. Install all dependencies (`flutter packages get` or `dart pub get`).
 3. Squash your commits and ensure you have a meaningful commit message.
 4. If you’ve fixed a bug or added code that should be tested, add tests! Pull Requests without 100% test coverage will not be approved.
 5. Ensure the test suite passes.
 6. If you've changed the public API, make sure to update/add documentation.
-7. Format your code (`dartfmt -w .`).
-8. Analyze your code (`dartanalyzer --fatal-infos --fatal-warnings .`).
+7. Format your code (`dart format .`).
+8. Analyze your code (`dart analyze --fatal-infos --fatal-warnings .`).
 9. Create the Pull Request.
 10. Verify that all status checks are passing.
 
@@ -38,4 +38,3 @@ By contributing to Equatable, you agree that your contributions will be licensed
 ## Attribution
 
 This contributing guide is adapted from Felix Angelov's [Equatable Package](https://github.com/felangel/equatable), available at <https://github.com/felangel/equatable/blob/master/CONTRIBUTING.md>
-
