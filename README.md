@@ -29,7 +29,7 @@ codenicLogger.info(messageLog, data: data);
 
 This section has examples of code for the following tasks:
 
-- [Logging on different log levels](#logging-with-different-log-levels)
+- [Logging with different log levels](#logging-with-different-log-levels)
 - [Logging an exception](#logging-an-exception)
 - [Setting a user ID](#setting-a-user-id)
 - [Customizing the logger](#customizing-the-log-output)
