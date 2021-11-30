@@ -1,5 +1,5 @@
 name: codenic_logger
-description: An extended logger for providing detailed log messages.
+description: An enhanced logger for providing structured and detailed log messages.
 version: 0.1.0
 homepage: https://github.com/CodenicCoders/codenic_logger
 

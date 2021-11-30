@@ -1,10 +1,7 @@
 import 'dart:convert';
 
 class MessageLog {
-  const MessageLog({
-    required this.message,
-    this.details,
-  });
+  const MessageLog({required this.message, this.details});
 
   factory MessageLog.fromJson(String source) =>
       MessageLog.fromMap(json.decode(source));
