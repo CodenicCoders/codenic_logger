@@ -6,80 +6,177 @@ import 'package:test/test.dart';
 class MockLogger extends Mock implements Logger {}
 
 void main() {
-  late MockLogger mockLogger;
-  late CodenicLogger logger;
-
-  setUp(
+  group(
+    'Logger',
     () {
-      mockLogger = MockLogger();
-      logger = CodenicLogger(logger: mockLogger);
-    },
-  );
+      group(
+        'log message',
+        () {
+          late MockLogger mockLogger;
+          late CodenicLogger logger;
 
-  test(
-    'Log message',
-    () {
-      // Assign
-      const message = MessageLog(message: 'Test message');
+          setUp(
+            () {
+              mockLogger = MockLogger();
+              logger = CodenicLogger(logger: mockLogger);
+            },
+          );
 
-      // Act
-      logger.info(message);
+          test(
+            'log verbose',
+            () {
+              // Assign
+              const message = MessageLog(message: 'Test message');
 
-      // Assert
-      verify(() => mockLogger.i('Test message')).called(1);
-    },
-  );
+              // Act
+              logger.verbose(message);
 
-  test(
-    'Log message with details',
-    () {
-      // Assign
-      const message =
-          MessageLog(message: 'Test message', details: 'Test details');
+              // Assert
+              verify(() => mockLogger.v('Test message')).called(1);
+            },
+          );
 
-      // Act
-      logger.info(message);
+          test(
+            'log debug',
+            () {
+              // Assign
+              const message = MessageLog(message: 'Test message');
 
-      // Assert
-      verify(() => mockLogger.i('Test message – Test details')).called(1);
-    },
-  );
+              // Act
+              logger.debug(message);
 
-  test(
-    'Log message with data',
-    () {
-      // Assign
-      const message =
-          MessageLog(message: 'Test message', details: 'Test details');
-      const data = {'foo': 1};
+              // Assert
+              verify(() => mockLogger.d('Test message')).called(1);
+            },
+          );
 
-      // Act
-      logger.info(message, data: data);
+          test(
+            'log info',
+            () {
+              // Assign
+              const message = MessageLog(message: 'Test message');
 
-      // Assert
-      verify(() => mockLogger.i('Test message – Test details {foo: 1}'))
-          .called(1);
-    },
-  );
+              // Act
+              logger.info(message);
 
-  test(
-    'Log message with user ID',
-    () {
-      // Assign
-      logger.userId = 'sample-uid';
+              // Assert
+              verify(() => mockLogger.i('Test message')).called(1);
+            },
+          );
 
-      const message =
-          MessageLog(message: 'Test message', details: 'Test details');
+          test(
+            'log warn',
+            () {
+              // Assign
+              const message = MessageLog(message: 'Test message');
 
-      const data = {'foo': 1};
+              // Act
+              logger.warn(message);
 
-      // Act
-      logger.info(message, data: data);
+              // Assert
+              verify(() => mockLogger.w('Test message')).called(1);
+            },
+          );
 
-      // Assert
-      verify(() => mockLogger
-              .i('Test message – Test details {__uid__: sample-uid, foo: 1}'))
-          .called(1);
+          test(
+            'log error',
+            () {
+              // Assign
+              const message = MessageLog(message: 'Test message');
+
+              // Act
+              logger.error(message);
+
+              // Assert
+              verify(() => mockLogger.e('Test message')).called(1);
+            },
+          );
+
+          test(
+            'log wtf',
+            () {
+              // Assign
+              const message = MessageLog(message: 'Test message');
+
+              // Act
+              logger.wtf(message);
+
+              // Assert
+              verify(() => mockLogger.wtf('Test message')).called(1);
+            },
+          );
+
+          test(
+            'log message with details',
+            () {
+              // Assign
+              const message =
+                  MessageLog(message: 'Test message', details: 'Test details');
+
+              // Act
+              logger.info(message);
+
+              // Assert
+              verify(() => mockLogger.i('Test message – Test details'))
+                  .called(1);
+            },
+          );
+
+          test(
+            'log message with data',
+            () {
+              // Assign
+              const message =
+                  MessageLog(message: 'Test message', details: 'Test details');
+              const data = {'foo': 1};
+
+              // Act
+              logger.info(message, data: data);
+
+              // Assert
+              verify(() => mockLogger.i('Test message – Test details {foo: 1}'))
+                  .called(1);
+            },
+          );
+
+          test(
+            'log message with user ID',
+            () {
+              // Assign
+              logger.userId = 'sample-uid';
+
+              const message =
+                  MessageLog(message: 'Test message', details: 'Test details');
+
+              const data = {'foo': 1};
+
+              // Act
+              logger.info(message, data: data);
+
+              // Assert
+              verify(() => mockLogger.i(
+                      'Test message – Test details {__uid__: sample-uid, foo: 1}'))
+                  .called(1);
+            },
+          );
+        },
+      );
+
+      group(
+        'constructor',
+        () {
+          test(
+              'do not throw an error when default constructor values are '
+              'initialized', () {
+            // Assign
+            CodenicLogger();
+
+            // Act
+            // Assert
+            expect(true, true);
+          });
+        },
+      );
     },
   );
 }
