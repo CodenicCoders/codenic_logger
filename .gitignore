@@ -75,5 +75,9 @@ build/
 !**/ios/**/default.pbxuser
 !**/ios/**/default.perspectivev3
 
-# Generated files
-*.mocks.dart
+# Coverage
+coverage/
+coverage_badge.svg
+.test_coverage.dart
+*.lcov
+nohup.out
