@@ -2,10 +2,10 @@ name: main
 
 on:
   push:
-  
-  pull_request:
     branches: [ master ]
-
+    
+  pull_request:
+    
   workflow_dispatch:
 
 jobs:
@@ -30,14 +30,14 @@ jobs:
           pub global activate test_coverage
           export PATH=$PATH:$HOME/.pub-cache/bin
           test_coverage
-          
-      - name: Upload Coverage to Codecov
-        uses: codecov/codecov-action@v2
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          
+              
       - name: Check Code Coverage
         uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
+        
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
   pana:
     runs-on: ubuntu-latest
