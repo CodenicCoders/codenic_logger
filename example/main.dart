@@ -1,7 +1,10 @@
 import 'package:codenic_logger/codenic_logger.dart';
 
 final codenicLogger = CodenicLogger();
-const messageLog = MessageLog(message: 'Sample message');
+final messageLog = MessageLog(
+  message: 'Sample message',
+  data: <String, dynamic>{'foo': false, 'lorep': 'ipsum'},
+);
 
 void main() {
   // To run, type `dart --enable-asserts example/main.dart`.
@@ -16,45 +19,34 @@ void main() {
 }
 
 void verboseWithUserId() {
-  codenicLogger.userId = 'sample-uid';
-  codenicLogger.info(
-    messageLog.copyWith(details: 'verbose'),
-    data: {'foo': false, 'lorep': 'ipsum'},
-  );
-  codenicLogger.userId = null;
+  messageLog.details = 'verbose';
+  codenicLogger
+    ..userId = 'sample-uid'
+    ..info(messageLog)
+    ..userId = null;
 }
 
 void verbose() {
-  codenicLogger.verbose(
-    messageLog.copyWith(details: 'verbose'),
-    data: {'foo': false, 'lorep': 'ipsum'},
-  );
+  messageLog.details = 'verbose';
+  codenicLogger.verbose(messageLog);
 }
 
 void debug() {
-  codenicLogger.debug(
-    messageLog.copyWith(details: 'debug'),
-    data: {'foo': false, 'lorep': 'ipsum'},
-  );
+  messageLog.details = 'debug';
+  codenicLogger.debug(messageLog);
 }
 
 void info() {
-  codenicLogger.info(
-    messageLog.copyWith(details: 'info'),
-    data: {'foo': false, 'lorep': 'ipsum'},
-  );
+  messageLog.details = 'info';
+  codenicLogger.info(messageLog);
 }
 
 void warn() {
   try {
     throw Exception('Test exception');
   } catch (exception, stackTrace) {
-    codenicLogger.warn(
-      messageLog.copyWith(details: 'warn'),
-      data: {'foo': false, 'lorep': 'ipsum'},
-      error: exception,
-      stackTrace: stackTrace,
-    );
+    messageLog.details = 'warn';
+    codenicLogger.warn(messageLog, error: exception, stackTrace: stackTrace);
   }
 }
 
@@ -62,12 +54,8 @@ void error() {
   try {
     throw Exception('Test exception');
   } catch (exception, stackTrace) {
-    codenicLogger.error(
-      messageLog.copyWith(details: 'error'),
-      data: {'foo': false, 'lorep': 'ipsum'},
-      error: exception,
-      stackTrace: stackTrace,
-    );
+    messageLog.details = 'error';
+    codenicLogger.error(messageLog, error: exception, stackTrace: stackTrace);
   }
 }
 
@@ -75,11 +63,7 @@ void wtf() {
   try {
     throw Exception('Test exception');
   } catch (exception, stackTrace) {
-    codenicLogger.wtf(
-      messageLog.copyWith(details: 'What the f---'),
-      data: {'foo': false, 'lorep': 'ipsum'},
-      error: exception,
-      stackTrace: stackTrace,
-    );
+    messageLog.details = 'wtf';
+    codenicLogger.wtf(messageLog, error: exception, stackTrace: stackTrace);
   }
 }
