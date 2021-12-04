@@ -26,11 +26,7 @@ To get started, just create a Codenic logger instance:
 ```dart
 final codenicLogger = CodenicLogger();
 
-const messageLog = MessageLog(
-  message: 'Save age failed',
-  details: 'No internet',
-  data: { 'age': 24 },
-);
+const messageLog = MessageLog(message: 'Save age failed', details: 'No internet', data: { 'age': 24 });
 
 codenicLogger.info(messageLog);
 ```
@@ -50,17 +46,14 @@ This section has examples of code for the following tasks:
 ```dart
 final codenicLogger = CodenicLogger();
 
-const messageLog = MessageLog(
-  message: 'Sample message',
-  data: { 'foo': false, 'lorep': 'ipsum' },
-);
+const messageLog = MessageLog(message: 'Sample message', data: { 'foo': false, 'lorep': 'ipsum' });
 
-codenicLogger.verbose(messageLog, data: data);
-codenicLogger.debug(messageLog, data: data);
-codenicLogger.info(messageLog, data: data);
-codenicLogger.warn(messageLog, data: data);
-codenicLogger.error(messageLog, data: data);
-codenicLogger.wtf(messageLog, data: data);
+codenicLogger.verbose(messageLog);
+codenicLogger.debug(messageLog);
+codenicLogger.info(messageLog);
+codenicLogger.warn(messageLog);
+codenicLogger.error(messageLog);
+codenicLogger.wtf(messageLog);
 ```
 
 ### Logging an exception
@@ -69,13 +62,12 @@ codenicLogger.wtf(messageLog, data: data);
 try {
     throw Exception('Test exception');
 } catch (exception, stackTrace) {
-  messageLog.details = 'An error has occurred';
-  codenicLogger.error(
-    messageLog,
-    data: {'foo': false, 'lorep': 'ipsum'},
-    error: exception,
-    stackTrace: stackTrace,
-  );
+    messageLog.details = 'An error occurred';
+    codenicLogger.error(
+        messageLog,
+        error: exception,
+        stackTrace: stackTrace,
+    );
 }
 ```
 
@@ -87,7 +79,7 @@ When a user ID is provided, it will automatically be included in the log data.
 
 ```dart
 codenicLogger.userId = 'sample-uid';
-codenicLogger.info(messageLog, data: data);
+codenicLogger.info(messageLog);
 ```
 
 <img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_3.webp?raw=true" alt="Sample detailed log messages" width=620/>
