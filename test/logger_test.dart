@@ -1,4 +1,5 @@
 import 'package:codenic_logger/codenic_logger.dart';
+import 'package:codenic_logger/src/message_log.dart';
 import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
@@ -26,7 +27,7 @@ void main() {
             'log verbose',
             () {
               // Assign
-              const message = MessageLog(message: 'Test message');
+              final message = MessageLog(message: 'Test message');
 
               // Act
               logger.verbose(message);
@@ -40,7 +41,7 @@ void main() {
             'log debug',
             () {
               // Assign
-              const message = MessageLog(message: 'Test message');
+              final message = MessageLog(message: 'Test message');
 
               // Act
               logger.debug(message);
@@ -54,7 +55,7 @@ void main() {
             'log info',
             () {
               // Assign
-              const message = MessageLog(message: 'Test message');
+              final message = MessageLog(message: 'Test message');
 
               // Act
               logger.info(message);
@@ -68,7 +69,7 @@ void main() {
             'log warn',
             () {
               // Assign
-              const message = MessageLog(message: 'Test message');
+              final message = MessageLog(message: 'Test message');
 
               // Act
               logger.warn(message);
@@ -82,7 +83,7 @@ void main() {
             'log error',
             () {
               // Assign
-              const message = MessageLog(message: 'Test message');
+              final message = MessageLog(message: 'Test message');
 
               // Act
               logger.error(message);
@@ -96,7 +97,7 @@ void main() {
             'log wtf',
             () {
               // Assign
-              const message = MessageLog(message: 'Test message');
+              final message = MessageLog(message: 'Test message');
 
               // Act
               logger.wtf(message);
@@ -110,7 +111,7 @@ void main() {
             'log message with details',
             () {
               // Assign
-              const message =
+              final message =
                   MessageLog(message: 'Test message', details: 'Test details');
 
               // Act
@@ -126,12 +127,14 @@ void main() {
             'log message with data',
             () {
               // Assign
-              const message =
-                  MessageLog(message: 'Test message', details: 'Test details');
-              const data = {'foo': 1};
+              final message = MessageLog(
+                message: 'Test message',
+                details: 'Test details',
+                data: <String, dynamic>{'foo': 1},
+              );
 
               // Act
-              logger.info(message, data: data);
+              logger.info(message);
 
               // Assert
               verify(() => mockLogger.i('Test message – Test details {foo: 1}'))
@@ -144,19 +147,21 @@ void main() {
             () {
               // Assign
               logger.userId = 'sample-uid';
-
-              const message =
-                  MessageLog(message: 'Test message', details: 'Test details');
-
-              const data = {'foo': 1};
+              final message = MessageLog(
+                message: 'Test message',
+                details: 'Test details',
+                data: <String, dynamic>{'foo': 1},
+              );
 
               // Act
-              logger.info(message, data: data);
+              logger.info(message);
 
               // Assert
-              verify(() => mockLogger.i(
-                      'Test message – Test details {__uid__: sample-uid, foo: 1}'))
-                  .called(1);
+              verify(
+                () => mockLogger.i(
+                  'Test message – Test details {__uid__: sample-uid, foo: 1}',
+                ),
+              ).called(1);
             },
           );
         },
