@@ -15,7 +15,7 @@ If you’re only fixing a bug, it’s fine to submit a pull request right away b
 Before creating a pull request please:
 
 1. Fork the repository and create your branch from `master`.
-2. Install all dependencies (`flutter packages get` or `dart pub get`).
+2. Install all dependencies (`dart pub get`).
 3. Squash your commits and ensure you have a meaningful commit message.
 4. If you’ve fixed a bug or added code that should be tested, add tests and ensure 100% test coverage. (`test_coverage`).
    - See: <https://pub.dev/packages/test_coverage>
