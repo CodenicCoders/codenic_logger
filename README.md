@@ -123,17 +123,16 @@ class FirebaseLogger extends CodenicLogger {
 
   @override
   void error(
-    MessageLog message, {
-    Map<String, dynamic>? data,
+    MessageLog messageLog, {
     error,
     StackTrace? stackTrace,
   }) {
-    super.error(message, data: data, error: error, stackTrace: stackTrace);
+    super.error(messageLog, error: error, stackTrace: stackTrace);
 
     FirebaseCrashlytics.instance.recordError(
       error,
       stackTrace,
-      reason: formatMessageData(message, data),
+      reason: messageLog,
     );
   }
 }
