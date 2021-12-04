@@ -147,7 +147,6 @@ void main() {
             () {
               // Assign
               logger.userId = 'sample-uid';
-
               final message = MessageLog(
                 message: 'Test message',
                 details: 'Test details',
