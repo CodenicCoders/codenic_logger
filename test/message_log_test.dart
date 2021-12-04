@@ -6,7 +6,6 @@ void main() {
     'Message log',
     () {
       group(
-
         'from json',
         () {
           test(
@@ -22,12 +21,10 @@ void main() {
 
               // Assert
               expect(messageLog.toString(), 'lorep – ipsum {fermentum: enim}');
-
             },
           );
 
           test(
-
             'construct object with no details from json',
             () {
               // Assign
@@ -52,7 +49,6 @@ void main() {
 
               // Assert
               expect(messageLog.toString(), 'lorep – ipsum');
-
             },
           );
         },
