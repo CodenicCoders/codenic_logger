@@ -5,7 +5,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/CodenicCoders/codenic_logger)
 ![Pub Version](https://img.shields.io/pub/v/codenic_logger?color=blue)
 
-A logger for providing structured and detailed log messages.
+A logger extension for providing structured and mutable log messages.
 
 > This uses the [logger](https://github.com/leisim/logger) package to produce log messages.
 
