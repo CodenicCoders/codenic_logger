@@ -62,8 +62,8 @@ void main() {
             () {
               // Assign
               final messageLog = MessageLog(
-                message: 'lorep',
-                details: 'ipsum',
+                name: 'lorep',
+                message: 'ipsum',
                 data: <String, dynamic>{'fermentum': 'enim'},
               );
 
@@ -85,7 +85,7 @@ void main() {
             () {
               // Assign
               final messageLog = MessageLog(
-                message: 'lorep',
+                name: 'lorep',
                 data: <String, dynamic>{'fermentum': 'enim'},
               );
 
@@ -106,7 +106,7 @@ void main() {
             'convert object with no data to json',
             () {
               // Assign
-              final messageLog = MessageLog(message: 'lorep', details: 'ipsum');
+              final messageLog = MessageLog(name: 'lorep', message: 'ipsum');
 
               // Act
               final json = messageLog.toJson();
@@ -194,8 +194,8 @@ void main() {
             () {
               // Assign
               final messageLog = MessageLog(
-                message: 'lorep',
-                details: 'ipsum',
+                name: 'lorep',
+                message: 'ipsum',
                 data: <String, dynamic>{'arcu': true, 'dictum': 42},
               );
 
@@ -219,7 +219,7 @@ void main() {
             () {
               // Assign
               final messageLog = MessageLog(
-                message: 'lorep',
+                name: 'lorep',
                 data: <String, dynamic>{'arcu': true, 'dictum': 42},
               );
 
@@ -242,7 +242,7 @@ void main() {
             'convert object with no data to map',
             () {
               // Assign
-              final messageLog = MessageLog(message: 'lorep', details: 'ipsum');
+              final messageLog = MessageLog(name: 'lorep', message: 'ipsum');
 
               // Act
               final map = messageLog.toMap();
@@ -269,14 +269,14 @@ void main() {
             () {
               // Assign
               final messageLog = MessageLog(
-                message: 'lorep',
-                details: 'ipsum',
+                name: 'lorep',
+                message: 'ipsum',
                 data: <String, dynamic>{'arcu': true, 'dictum': 42},
               );
 
               // Act
               final newMessageLog = messageLog.copyWith(
-                message: 'nunc',
+                name: 'nunc',
               );
 
               // Assert
@@ -292,14 +292,14 @@ void main() {
             () {
               // Assign
               final messageLog = MessageLog(
-                message: 'lorep',
-                details: 'ipsum',
+                name: 'lorep',
+                message: 'ipsum',
                 data: <String, dynamic>{'arcu': true, 'dictum': 42},
               );
 
               // Act
               final newMessageLog = messageLog.copyWith(
-                details: 'vel',
+                message: 'vel',
               );
 
               // Assert
@@ -315,8 +315,8 @@ void main() {
             () {
               // Assign
               final messageLog = MessageLog(
-                message: 'lorep',
-                details: 'ipsum',
+                name: 'lorep',
+                message: 'ipsum',
                 data: <String, dynamic>{'arcu': true, 'dictum': 42},
               );
 

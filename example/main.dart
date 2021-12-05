@@ -1,69 +1,63 @@
 import 'package:codenic_logger/codenic_logger.dart';
 
 final codenicLogger = CodenicLogger();
-final messageLog = MessageLog(
-  message: 'Sample message',
-  data: <String, dynamic>{'foo': false, 'lorep': 'ipsum'},
-);
 
 void main() {
   // To run, type `dart --enable-asserts example/main.dart`.
 
-  verboseWithUserId();
-  verbose();
-  debug();
-  info();
-  warn();
-  error();
-  wtf();
+  completeLogWithUserId();
+  updateMessageLog();
+  logError();
+  logLevels();
 }
 
-void verboseWithUserId() {
-  messageLog.details = 'verbose';
+void completeLogWithUserId() {
+  final messageLog = MessageLog(
+    id: 'complete_log_with_user_id',
+    message: 'Log success',
+    data: <String, dynamic>{'lorep': 'ipsum', 'mauris': 42},
+  );
+
+  // Assign then remove user ID after printing.
+
   codenicLogger
     ..userId = 'sample-uid'
-    ..info(messageLog)
+    ..verbose(messageLog)
     ..userId = null;
 }
 
-void verbose() {
-  messageLog.details = 'verbose';
-  codenicLogger.verbose(messageLog);
+void updateMessageLog() {
+  final messageLog = MessageLog(id: 'update_message_log');
+
+  codenicLogger.verbose(
+    messageLog
+      ..message = 'Update message log success'
+      ..data.addAll(<String, dynamic>{'lorep': 'ipsum', 'mauris': 42}),
+  );
 }
 
-void debug() {
-  messageLog.details = 'debug';
-  codenicLogger.debug(messageLog);
-}
+void logError() {
+  final messageLog = MessageLog(id: 'log_error');
 
-void info() {
-  messageLog.details = 'info';
-  codenicLogger.info(messageLog);
-}
-
-void warn() {
   try {
     throw Exception('Test exception');
   } catch (exception, stackTrace) {
-    messageLog.details = 'warn';
-    codenicLogger.warn(messageLog, error: exception, stackTrace: stackTrace);
+    codenicLogger.error(
+      messageLog..message = 'An unknown error occurred',
+      error: exception,
+      stackTrace: stackTrace,
+    );
   }
 }
 
-void error() {
-  try {
-    throw Exception('Test exception');
-  } catch (exception, stackTrace) {
-    messageLog.details = 'error';
-    codenicLogger.error(messageLog, error: exception, stackTrace: stackTrace);
-  }
-}
+void logLevels() {
+  final messageLog = MessageLog(id: 'log_levels');
 
-void wtf() {
-  try {
-    throw Exception('Test exception');
-  } catch (exception, stackTrace) {
-    messageLog.details = 'wtf';
-    codenicLogger.wtf(messageLog, error: exception, stackTrace: stackTrace);
-  }
+  codenicLogger
+    ..verbose(messageLog..message = 'Verbose log success')
+    ..debug(messageLog..message = 'Debug log success')
+    ..info(messageLog..message = 'Info log success')
+    ..warn(messageLog..message = 'Warn log success')
+    ..error(messageLog..message = 'Error log success')
+    ..wtf(messageLog..message = 'Wtf log success');
 }

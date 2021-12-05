@@ -7,6 +7,9 @@ import 'package:test/test.dart';
 class MockLogger extends Mock implements Logger {}
 
 void main() {
+
+  
+
   group(
     'Logger',
     () {
@@ -27,7 +30,7 @@ void main() {
             'log verbose',
             () {
               // Assign
-              final message = MessageLog(message: 'Test message');
+              final message = MessageLog(name: 'Test message');
 
               // Act
               logger.verbose(message);
@@ -41,7 +44,7 @@ void main() {
             'log debug',
             () {
               // Assign
-              final message = MessageLog(message: 'Test message');
+              final message = MessageLog(name: 'Test message');
 
               // Act
               logger.debug(message);
@@ -55,7 +58,7 @@ void main() {
             'log info',
             () {
               // Assign
-              final message = MessageLog(message: 'Test message');
+              final message = MessageLog(name: 'Test message');
 
               // Act
               logger.info(message);
@@ -69,7 +72,7 @@ void main() {
             'log warn',
             () {
               // Assign
-              final message = MessageLog(message: 'Test message');
+              final message = MessageLog(name: 'Test message');
 
               // Act
               logger.warn(message);
@@ -83,7 +86,7 @@ void main() {
             'log error',
             () {
               // Assign
-              final message = MessageLog(message: 'Test message');
+              final message = MessageLog(name: 'Test message');
 
               // Act
               logger.error(message);
@@ -97,7 +100,7 @@ void main() {
             'log wtf',
             () {
               // Assign
-              final message = MessageLog(message: 'Test message');
+              final message = MessageLog(name: 'Test message');
 
               // Act
               logger.wtf(message);
@@ -112,7 +115,7 @@ void main() {
             () {
               // Assign
               final message =
-                  MessageLog(message: 'Test message', details: 'Test details');
+                  MessageLog(name: 'Test message', message: 'Test details');
 
               // Act
               logger.info(message);
@@ -128,8 +131,8 @@ void main() {
             () {
               // Assign
               final message = MessageLog(
-                message: 'Test message',
-                details: 'Test details',
+                name: 'Test message',
+                message: 'Test details',
                 data: <String, dynamic>{'foo': 1},
               );
 
@@ -148,8 +151,8 @@ void main() {
               // Assign
               logger.userId = 'sample-uid';
               final message = MessageLog(
-                message: 'Test message',
-                details: 'Test details',
+                name: 'Test message',
+                message: 'Test details',
                 data: <String, dynamic>{'foo': 1},
               );
 
