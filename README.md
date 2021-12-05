@@ -9,7 +9,7 @@ A logger for providing structured and detailed log messages.
 
 > This uses the [logger](https://github.com/leisim/logger) package to produce log messages.
 
-<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_1.webp?raw=true" alt="Sample detailed log messages"/>
+<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_1.webp?raw=true" alt="Sample detailed log messages" width=640/>
 
 ## Features
 
@@ -69,7 +69,7 @@ try {
 }
 ```
 
-<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_2.webp?raw=true" alt="Sample detailed log messages"/>
+<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_2.webp?raw=true" alt="Sample detailed log messages" width=640/>
 
 ### Setting a user ID
 
@@ -80,7 +80,7 @@ codenicLogger.userId = 'sample-uid';
 codenicLogger.info(messageLog);
 ```
 
-<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_3.webp?raw=true" alt="Sample detailed log messages" width=620/>
+<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_3.webp?raw=true" alt="Sample detailed log messages" width=640/>
 
 To remove the user ID, simply set it back to `null`:
 

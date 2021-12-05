@@ -1,3 +1,7 @@
+## 0.4.0
+
+– Redesign `MessageLog`.
+
 ## 0.3.0
 
 – Make the `data` field in `MessageLog` non-nullable.
