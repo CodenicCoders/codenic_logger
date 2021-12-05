@@ -6,8 +6,8 @@ class MessageLog {
   MessageLog({
     required this.message,
     this.details,
-    this.data,
-  });
+    Map<String, dynamic>? data,
+  }) : data = data ?? <String, dynamic>{};
 
   /// Creates an instance from the given [source] json.
   factory MessageLog.fromJson(String source) =>
@@ -17,17 +17,17 @@ class MessageLog {
   factory MessageLog.fromMap(Map<String, dynamic> map) => MessageLog(
         message: map['message'] as String,
         details: map['details'] as String?,
-        data: map['data'] as Map<String, dynamic>?,
+        data: map['data'] as Map<String, dynamic>? ?? <String, dynamic>{},
       );
 
   /// The general log message.
   String message;
 
+  /// A collection of data providing more context about the log message.
+  Map<String, dynamic> data;
+
   /// Additional details about the logged activity.
   String? details;
-
-  /// A collection of data providing more context about the log message.
-  final Map<String, dynamic>? data;
 
   /// Creates a copy of this object but replacing the old values with the new
   /// values, if any.
@@ -59,7 +59,7 @@ class MessageLog {
   @override
   String toString() => '$message'
       '${details != null ? ' – $details' : ''}'
-      '${data?.isNotEmpty ?? false ? ' $data' : ''}';
+      '${data.isNotEmpty ? ' $data' : ''}';
 
   /// Converts this object into a map object.
   Map<String, dynamic> toMap() => <String, dynamic>{

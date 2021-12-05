@@ -116,7 +116,7 @@ void main() {
                 json,
                 '{"message":"lorep",'
                 '"details":"ipsum",'
-                '"data":null}',
+                '"data":{}}',
               );
             },
           );
@@ -253,7 +253,7 @@ void main() {
                 {
                   'message': 'lorep',
                   'details': 'ipsum',
-                  'data': null,
+                  'data': <String, dynamic>{},
                 },
               );
             },

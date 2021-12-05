@@ -33,7 +33,7 @@ class CodenicLogger {
   MessageLog _tryAppendUserIdToMessageLog(MessageLog messageLog) =>
       userId != null
           ? messageLog.copyWith(
-              data: <String, dynamic>{'__uid__': userId, ...?messageLog.data},
+              data: <String, dynamic>{'__uid__': userId, ...messageLog.data},
             )
           : messageLog;
 

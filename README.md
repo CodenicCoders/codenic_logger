@@ -60,14 +60,14 @@ codenicLogger.wtf(messageLog);
 
 ```dart
 try {
-    throw Exception('Test exception');
+  throw Exception('Test exception');
 } catch (exception, stackTrace) {
-    messageLog.details = 'An error occurred';
-    codenicLogger.error(
-        messageLog,
-        error: exception,
-        stackTrace: stackTrace,
-    );
+  messageLog.details = 'An error occurred';
+  codenicLogger.error(
+    messageLog,
+    error: exception,
+    stackTrace: stackTrace,
+  );
 }
 ```
 
@@ -124,7 +124,7 @@ class FirebaseLogger extends CodenicLogger {
   @override
   void error(
     MessageLog messageLog, {
-    error,
+    dynamic error,
     StackTrace? stackTrace,
   }) {
     super.error(messageLog, error: error, stackTrace: stackTrace);
