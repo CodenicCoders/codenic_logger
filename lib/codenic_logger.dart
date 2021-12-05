@@ -14,14 +14,14 @@ class CodenicLogger {
     logs.Logger? logger,
   }) : _logger = logger ??
             logs.Logger(
-              printer: logs.PrettyPrinter(),
+              printer: logs.PrettyPrinter(printTime: true),
               output: ExtendedLogOutput(),
             );
 
   /// An instance of the [logger package](https://pub.dev/packages/logger) used
   /// for generating log outputs.
   ///
-  /// A new logger can be provided to customize the output.
+  /// To customize the log output, provide a custom logger.
   final logs.Logger _logger;
 
   /// Associates the log messages with this user ID.

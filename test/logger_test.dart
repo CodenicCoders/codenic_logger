@@ -1,5 +1,4 @@
 import 'package:codenic_logger/codenic_logger.dart';
-import 'package:codenic_logger/src/message_log.dart';
 import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
@@ -11,7 +10,7 @@ void main() {
     'Logger',
     () {
       group(
-        'log message',
+        'log levels',
         () {
           late MockLogger mockLogger;
           late CodenicLogger logger;
@@ -27,13 +26,13 @@ void main() {
             'log verbose',
             () {
               // Assign
-              final message = MessageLog(message: 'Test message');
+              final message = MessageLog(id: 'lorep_ipsum');
 
               // Act
               logger.verbose(message);
 
               // Assert
-              verify(() => mockLogger.v('Test message')).called(1);
+              verify(() => mockLogger.v('identifier: lorep_ipsum')).called(1);
             },
           );
 
@@ -41,13 +40,13 @@ void main() {
             'log debug',
             () {
               // Assign
-              final message = MessageLog(message: 'Test message');
+              final message = MessageLog(id: 'lorep_ipsum');
 
               // Act
               logger.debug(message);
 
               // Assert
-              verify(() => mockLogger.d('Test message')).called(1);
+              verify(() => mockLogger.d('identifier: lorep_ipsum')).called(1);
             },
           );
 
@@ -55,13 +54,13 @@ void main() {
             'log info',
             () {
               // Assign
-              final message = MessageLog(message: 'Test message');
+              final message = MessageLog(id: 'lorep_ipsum');
 
               // Act
               logger.info(message);
 
               // Assert
-              verify(() => mockLogger.i('Test message')).called(1);
+              verify(() => mockLogger.i('identifier: lorep_ipsum')).called(1);
             },
           );
 
@@ -69,13 +68,13 @@ void main() {
             'log warn',
             () {
               // Assign
-              final message = MessageLog(message: 'Test message');
+              final message = MessageLog(id: 'lorep_ipsum');
 
               // Act
               logger.warn(message);
 
               // Assert
-              verify(() => mockLogger.w('Test message')).called(1);
+              verify(() => mockLogger.w('identifier: lorep_ipsum')).called(1);
             },
           );
 
@@ -83,13 +82,13 @@ void main() {
             'log error',
             () {
               // Assign
-              final message = MessageLog(message: 'Test message');
+              final message = MessageLog(id: 'lorep_ipsum');
 
               // Act
               logger.error(message);
 
               // Assert
-              verify(() => mockLogger.e('Test message')).called(1);
+              verify(() => mockLogger.e('identifier: lorep_ipsum')).called(1);
             },
           );
 
@@ -97,48 +96,13 @@ void main() {
             'log wtf',
             () {
               // Assign
-              final message = MessageLog(message: 'Test message');
+              final message = MessageLog(id: 'lorep_ipsum');
 
               // Act
               logger.wtf(message);
 
               // Assert
-              verify(() => mockLogger.wtf('Test message')).called(1);
-            },
-          );
-
-          test(
-            'log message with details',
-            () {
-              // Assign
-              final message =
-                  MessageLog(message: 'Test message', details: 'Test details');
-
-              // Act
-              logger.info(message);
-
-              // Assert
-              verify(() => mockLogger.i('Test message – Test details'))
-                  .called(1);
-            },
-          );
-
-          test(
-            'log message with data',
-            () {
-              // Assign
-              final message = MessageLog(
-                message: 'Test message',
-                details: 'Test details',
-                data: <String, dynamic>{'foo': 1},
-              );
-
-              // Act
-              logger.info(message);
-
-              // Assert
-              verify(() => mockLogger.i('Test message – Test details {foo: 1}'))
-                  .called(1);
+              verify(() => mockLogger.wtf('identifier: lorep_ipsum')).called(1);
             },
           );
 
@@ -148,8 +112,7 @@ void main() {
               // Assign
               logger.userId = 'sample-uid';
               final message = MessageLog(
-                message: 'Test message',
-                details: 'Test details',
+                id: 'lorep_ipsum',
                 data: <String, dynamic>{'foo': 1},
               );
 
@@ -159,7 +122,8 @@ void main() {
               // Assert
               verify(
                 () => mockLogger.i(
-                  'Test message – Test details {__uid__: sample-uid, foo: 1}',
+                  'identifier: lorep_ipsum'
+                  '\ndata: {__uid__: sample-uid, foo: 1}',
                 ),
               ).called(1);
             },
@@ -167,21 +131,18 @@ void main() {
         },
       );
 
-      group(
-        'constructor',
-        () {
-          test(
-              'do not throw an error when default constructor values are '
-              'initialized', () {
-            // Assign
-            CodenicLogger();
+      group('constructor', () {
+        test(
+            'do not throw an error when default constructor values are '
+            'initialized', () {
+          // Assign
+          CodenicLogger();
 
-            // Act
-            // Assert
-            expect(true, true);
-          });
-        },
-      );
+          // Act
+          // Assert
+          expect(true, true);
+        });
+      });
     },
   );
 }

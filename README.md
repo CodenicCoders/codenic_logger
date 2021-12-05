@@ -15,7 +15,7 @@ A logger for providing structured and detailed log messages.
 
 Use this plugin in your app to:
 
-- Structurally add log message, details and data.
+- Structurally create mutable log messages.
 - Log messages on multiple log levels – verbose, debug, info, warning, error and wtf.
 - Automatically add a user ID to all log data upon logging.
 
@@ -38,6 +38,7 @@ This section has examples of code for the following tasks:
 - [Logging with different log levels](#logging-with-different-log-levels)
 - [Logging an exception](#logging-an-exception)
 - [Setting a user ID](#setting-a-user-id)
+  – [Adding log data](#adding-log-data)
 - [Customizing the logger](#customizing-the-log-output)
 - [Sample Integration: Firebase Crashlytics](#sample-integration-firebase-crashlytics)
 
@@ -46,14 +47,15 @@ This section has examples of code for the following tasks:
 ```dart
 final codenicLogger = CodenicLogger();
 
-const messageLog = MessageLog(message: 'Sample message', data: { 'foo': false, 'lorep': 'ipsum' });
+final messageLog = MessageLog(id: 'log_levels');
 
-codenicLogger.verbose(messageLog);
-codenicLogger.debug(messageLog);
-codenicLogger.info(messageLog);
-codenicLogger.warn(messageLog);
-codenicLogger.error(messageLog);
-codenicLogger.wtf(messageLog);
+codenicLogger
+  ..verbose(messageLog..message = 'Verbose log success')
+  ..debug(messageLog..message = 'Debug log success')
+  ..info(messageLog..message = 'Info log success')
+  ..warn(messageLog..message = 'Warn log success')
+  ..error(messageLog..message = 'Error log success')
+  ..wtf(messageLog..message = 'Wtf log success');
 ```
 
 ### Logging an exception
@@ -62,16 +64,12 @@ codenicLogger.wtf(messageLog);
 try {
   throw Exception('Test exception');
 } catch (exception, stackTrace) {
-  messageLog.details = 'An error occurred';
-  codenicLogger.error(
-    messageLog,
-    error: exception,
-    stackTrace: stackTrace,
-  );
+  messageLog.message = 'An error occurred';
+  codenicLogger.error(messageLog, error: exception, stackTrace: stackTrace);
 }
 ```
 
-<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_2.webp?raw=true" alt="Sample detailed log messages" width=620/>
+<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_2.webp?raw=true" alt="Sample detailed log messages"/>
 
 ### Setting a user ID
 
@@ -88,6 +86,18 @@ To remove the user ID, simply set it back to `null`:
 
 ```dart
 codenic.userId = null;
+```
+
+### Updating message log properties
+
+```dart
+final messageLog = MessageLog(id: 'update_message_log');
+
+messageLog
+  ..message = 'Update message log success'
+  ..data.addAll({'lorep': 'ipsum', 'mauris': 42});
+
+codenicLogger.verbose(messageLog);
 ```
 
 ### Customizing the log output
