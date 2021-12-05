@@ -14,7 +14,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: subosito/flutter-action@v1
+      - uses: subosito/flutter-action@v1 # Use Flutter SDK for reliable test coverage
 
       - name: Install Dependencies
         run: dart pub get
