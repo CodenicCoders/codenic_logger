@@ -26,7 +26,11 @@ To get started, just create a Codenic logger instance:
 ```dart
 final codenicLogger = CodenicLogger();
 
-const messageLog = MessageLog(message: 'Save age failed', details: 'No internet', data: { 'age': 24 });
+const messageLog = MessageLog(
+  id: 'save_user_info',
+  message: 'Save completed',
+  data: { 'name': 'Jayce', 'age': 24 },
+);
 
 codenicLogger.info(messageLog);
 ```

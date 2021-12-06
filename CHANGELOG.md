@@ -1,6 +1,10 @@
+## 0.4.2
+
+– Update README.md
+
 ## 0.4.1
 
-º Update README.md
+– Update README.md
 
 ## 0.4.0
 
