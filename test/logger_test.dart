@@ -1,9 +1,15 @@
 import 'package:codenic_logger/codenic_logger.dart';
+import 'package:codenic_logger/src/message_log_printer.dart';
+import 'package:codenic_logger/src/untruncated_log_output.dart';
 import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
 class MockLogger extends Mock implements Logger {}
+
+class MockPrinter extends Mock {
+  void call(Object? object);
+}
 
 void main() {
   group(
@@ -26,13 +32,13 @@ void main() {
             'log verbose',
             () {
               // Assign
-              final message = MessageLog(id: 'lorep_ipsum');
+              final messageLog = MessageLog(id: 'lorep_ipsum');
 
               // Act
-              logger.verbose(message);
+              logger.verbose(messageLog);
 
               // Assert
-              verify(() => mockLogger.v('identifier: lorep_ipsum')).called(1);
+              verify(() => mockLogger.v(messageLog)).called(1);
             },
           );
 
@@ -40,13 +46,13 @@ void main() {
             'log debug',
             () {
               // Assign
-              final message = MessageLog(id: 'lorep_ipsum');
+              final messageLog = MessageLog(id: 'lorep_ipsum');
 
               // Act
-              logger.debug(message);
+              logger.debug(messageLog);
 
               // Assert
-              verify(() => mockLogger.d('identifier: lorep_ipsum')).called(1);
+              verify(() => mockLogger.d(messageLog)).called(1);
             },
           );
 
@@ -54,13 +60,13 @@ void main() {
             'log info',
             () {
               // Assign
-              final message = MessageLog(id: 'lorep_ipsum');
+              final messageLog = MessageLog(id: 'lorep_ipsum');
 
               // Act
-              logger.info(message);
+              logger.info(messageLog);
 
               // Assert
-              verify(() => mockLogger.i('identifier: lorep_ipsum')).called(1);
+              verify(() => mockLogger.i(messageLog)).called(1);
             },
           );
 
@@ -68,13 +74,13 @@ void main() {
             'log warn',
             () {
               // Assign
-              final message = MessageLog(id: 'lorep_ipsum');
+              final messageLog = MessageLog(id: 'lorep_ipsum');
 
               // Act
-              logger.warn(message);
+              logger.warn(messageLog);
 
               // Assert
-              verify(() => mockLogger.w('identifier: lorep_ipsum')).called(1);
+              verify(() => mockLogger.w(messageLog)).called(1);
             },
           );
 
@@ -82,13 +88,13 @@ void main() {
             'log error',
             () {
               // Assign
-              final message = MessageLog(id: 'lorep_ipsum');
+              final messageLog = MessageLog(id: 'lorep_ipsum');
 
               // Act
-              logger.error(message);
+              logger.error(messageLog);
 
               // Assert
-              verify(() => mockLogger.e('identifier: lorep_ipsum')).called(1);
+              verify(() => mockLogger.e(messageLog)).called(1);
             },
           );
 
@@ -96,13 +102,13 @@ void main() {
             'log wtf',
             () {
               // Assign
-              final message = MessageLog(id: 'lorep_ipsum');
+              final messageLog = MessageLog(id: 'lorep_ipsum');
 
               // Act
-              logger.wtf(message);
+              logger.wtf(messageLog);
 
               // Assert
-              verify(() => mockLogger.wtf('identifier: lorep_ipsum')).called(1);
+              verify(() => mockLogger.wtf(messageLog)).called(1);
             },
           );
 
@@ -111,19 +117,23 @@ void main() {
             () {
               // Assign
               logger.userId = 'sample-uid';
-              final message = MessageLog(
+              final messageLog = MessageLog(
                 id: 'lorep_ipsum',
                 data: <String, dynamic>{'foo': 1},
               );
 
               // Act
-              logger.info(message);
+              logger.info(messageLog);
 
               // Assert
               verify(
                 () => mockLogger.i(
-                  'identifier: lorep_ipsum'
-                  '\ndata: {__uid__: sample-uid, foo: 1}',
+                  messageLog.copyWith(
+                    data: <String, dynamic>{
+                      '__uid__': 'sample-uid',
+                      ...messageLog.data
+                    },
+                  ),
                 ),
               ).called(1);
             },
@@ -142,6 +152,36 @@ void main() {
           // Assert
           expect(true, true);
         });
+
+        test(
+          'should untruncate text',
+          () {
+            final mockPrinter = MockPrinter();
+
+            // Given
+            final untruncatedLogOutput = UntruncatedLogOutput(
+              printer: mockPrinter,
+              textLengthLimit: 5,
+            );
+
+            final logger = Logger(
+              output: untruncatedLogOutput,
+              printer: MessageLogPrinter(),
+            );
+
+            final codenicLogger = CodenicLogger(logger: logger);
+
+            final messageLog =
+                MessageLog(id: 'sample-id', message: 'lorepipsum');
+
+            // When
+            codenicLogger.info(messageLog);
+
+            // Then
+            verify(() => mockPrinter.call('lorep')).called(1);
+            verify(() => mockPrinter.call('ipsum')).called(1);
+          },
+        );
       });
     },
   );

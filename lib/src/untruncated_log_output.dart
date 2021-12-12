@@ -1,5 +1,3 @@
-import 'dart:io' show Platform;
-
 import 'package:logger/logger.dart';
 
 /// Prints the entire log output without being truncated.
@@ -9,9 +7,9 @@ import 'package:logger/logger.dart';
 /// ensure that it gets entirely printed.
 ///
 /// See https://github.com/flutter/flutter/issues/22665#issuecomment-496130148
-class CompleteLogOutput extends LogOutput {
-  /// The default constructor.
-  CompleteLogOutput({this.textLengthLimit = 1000, this.printer});
+class UntruncatedLogOutput extends LogOutput {
+  // ignore: public_member_api_docs
+  UntruncatedLogOutput({this.textLengthLimit = 1000, this.printer});
 
   /// The max text length allowed.
   ///
@@ -24,8 +22,7 @@ class CompleteLogOutput extends LogOutput {
   final void Function(String? object)? printer;
 
   @override
-  void output(OutputEvent event) =>
-      event.lines.forEach(Platform.isAndroid ? _printWrapped : print);
+  void output(OutputEvent event) => event.lines.forEach(_printWrapped);
 
   /// Prints the [text] by batch to ensure they do not get truncated.
   void _printWrapped(String text) {

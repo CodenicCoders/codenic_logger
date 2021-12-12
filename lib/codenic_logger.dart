@@ -1,21 +1,24 @@
-import 'package:codenic_logger/src/extended_log_output.dart';
 import 'package:codenic_logger/src/message_log.dart';
+import 'package:codenic_logger/src/message_log_printer.dart';
+import 'package:codenic_logger/src/untruncated_log_output.dart';
 import 'package:logger/logger.dart' as logs;
 import 'package:meta/meta.dart';
 
-export 'package:codenic_logger/src/extended_log_output.dart';
 export 'package:codenic_logger/src/message_log.dart';
+export 'package:codenic_logger/src/untruncated_log_output.dart';
 export 'package:logger/logger.dart';
 
 /// An extension of [logs.Logger] for providing detailed log messages.
 class CodenicLogger {
-  /// The default constructor.
+  /// Creates a logger that appropriately displays information from a
+  /// [MessageLog].
+
   CodenicLogger({
     logs.Logger? logger,
   }) : _logger = logger ??
             logs.Logger(
-              printer: logs.PrettyPrinter(printTime: true),
-              output: ExtendedLogOutput(),
+              printer: MessageLogPrinter(),
+              output: UntruncatedLogOutput(),
             );
 
   /// An instance of the [logger package](https://pub.dev/packages/logger) used
@@ -50,7 +53,7 @@ class CodenicLogger {
     StackTrace? stackTrace,
   }) =>
       _logger.v(
-        '${_tryAppendUserIdToMessageLog(messageLog)}',
+        _tryAppendUserIdToMessageLog(messageLog),
         error,
         stackTrace,
       );
@@ -64,7 +67,7 @@ class CodenicLogger {
   @mustCallSuper
   void debug(MessageLog messageLog, {dynamic error, StackTrace? stackTrace}) =>
       _logger.d(
-        '${_tryAppendUserIdToMessageLog(messageLog)}',
+        _tryAppendUserIdToMessageLog(messageLog),
         error,
         stackTrace,
       );
@@ -78,7 +81,7 @@ class CodenicLogger {
   @mustCallSuper
   void info(MessageLog messageLog, {dynamic error, StackTrace? stackTrace}) =>
       _logger.i(
-        '${_tryAppendUserIdToMessageLog(messageLog)}',
+        _tryAppendUserIdToMessageLog(messageLog),
         error,
         stackTrace,
       );
@@ -92,7 +95,7 @@ class CodenicLogger {
   @mustCallSuper
   void warn(MessageLog messageLog, {dynamic error, StackTrace? stackTrace}) =>
       _logger.w(
-        '${_tryAppendUserIdToMessageLog(messageLog)}',
+        _tryAppendUserIdToMessageLog(messageLog),
         error,
         stackTrace,
       );
@@ -106,7 +109,7 @@ class CodenicLogger {
   @mustCallSuper
   void error(MessageLog messageLog, {dynamic error, StackTrace? stackTrace}) =>
       _logger.e(
-        '${_tryAppendUserIdToMessageLog(messageLog)}',
+        _tryAppendUserIdToMessageLog(messageLog),
         error,
         stackTrace,
       );
@@ -120,7 +123,7 @@ class CodenicLogger {
   @mustCallSuper
   void wtf(MessageLog messageLog, {dynamic error, StackTrace? stackTrace}) =>
       _logger.wtf(
-        '${_tryAppendUserIdToMessageLog(messageLog)}',
+        _tryAppendUserIdToMessageLog(messageLog),
         error,
         stackTrace,
       );
