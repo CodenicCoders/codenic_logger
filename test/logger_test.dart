@@ -1,6 +1,6 @@
+import 'dart:io';
+
 import 'package:codenic_logger/codenic_logger.dart';
-import 'package:codenic_logger/src/message_log_printer.dart';
-import 'package:codenic_logger/src/untruncated_log_output.dart';
 import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
@@ -29,7 +29,7 @@ void main() {
           );
 
           test(
-            'log verbose',
+            'should log verbose',
             () {
               // Assign
               final messageLog = MessageLog(id: 'lorep_ipsum');
@@ -43,7 +43,7 @@ void main() {
           );
 
           test(
-            'log debug',
+            'should log debug',
             () {
               // Assign
               final messageLog = MessageLog(id: 'lorep_ipsum');
@@ -57,7 +57,7 @@ void main() {
           );
 
           test(
-            'log info',
+            'should log info',
             () {
               // Assign
               final messageLog = MessageLog(id: 'lorep_ipsum');
@@ -71,7 +71,7 @@ void main() {
           );
 
           test(
-            'log warn',
+            'should log warn',
             () {
               // Assign
               final messageLog = MessageLog(id: 'lorep_ipsum');
@@ -85,7 +85,7 @@ void main() {
           );
 
           test(
-            'log error',
+            'should log error',
             () {
               // Assign
               final messageLog = MessageLog(id: 'lorep_ipsum');
@@ -99,7 +99,7 @@ void main() {
           );
 
           test(
-            'log wtf',
+            'should log wtf',
             () {
               // Assign
               final messageLog = MessageLog(id: 'lorep_ipsum');
@@ -113,7 +113,7 @@ void main() {
           );
 
           test(
-            'log message with user ID',
+            'should log message with user ID',
             () {
               // Assign
               logger.userId = 'sample-uid';
@@ -141,9 +141,48 @@ void main() {
         },
       );
 
+      group(
+        'error',
+        () {
+          setUpAll(() {
+            registerFallbackValue(StackTrace.empty);
+          });
+
+          test(
+            'should log exception',
+            () {
+              // Given
+              final mockLogger = MockLogger();
+              final logger = CodenicLogger(logger: mockLogger);
+              final messageLog = MessageLog(id: 'sample');
+
+              // When
+              try {
+                throw const SocketException('no-internet');
+              } catch (exception, stackTrace) {
+                logger.error(
+                  messageLog,
+                  error: exception,
+                  stackTrace: stackTrace,
+                );
+              }
+
+              // Then
+              verify(
+                () => mockLogger.e(
+                  messageLog,
+                  const SocketException('no-internet'),
+                  any<StackTrace>(),
+                ),
+              ).called(1);
+            },
+          );
+        },
+      );
+
       group('constructor', () {
         test(
-            'do not throw an error when default constructor values are '
+            'should not throw an error when default constructor values are '
             'initialized', () {
           // Assign
           CodenicLogger();
@@ -152,36 +191,6 @@ void main() {
           // Assert
           expect(true, true);
         });
-
-        test(
-          'should untruncate text',
-          () {
-            final mockPrinter = MockPrinter();
-
-            // Given
-            final untruncatedLogOutput = UntruncatedLogOutput(
-              printer: mockPrinter,
-              textLengthLimit: 5,
-            );
-
-            final logger = Logger(
-              output: untruncatedLogOutput,
-              printer: MessageLogPrinter(),
-            );
-
-            final codenicLogger = CodenicLogger(logger: logger);
-
-            final messageLog =
-                MessageLog(id: 'sample-id', message: 'lorepipsum');
-
-            // When
-            codenicLogger.info(messageLog);
-
-            // Then
-            verify(() => mockPrinter.call('lorep')).called(1);
-            verify(() => mockPrinter.call('ipsum')).called(1);
-          },
-        );
       });
     },
   );

@@ -48,6 +48,19 @@ class MessageLogPrinter extends PrettyPrinter {
   final String divider;
 
   @override
+  String? formatStackTrace(StackTrace? stackTrace, int methodCount) {
+    final stackTraceSplit = stackTrace.toString().split('\n')
+      ..removeWhere((str) => str.contains('package:codenic_logger'));
+
+    final stackTraceSanitizedStr = stackTraceSplit.join('\n');
+
+    return super.formatStackTrace(
+      StackTrace.fromString(stackTraceSanitizedStr),
+      methodCount,
+    );
+  }
+
+  @override
   List<String> log(LogEvent event) {
     String? stackTraceFormatted;
 
@@ -71,12 +84,6 @@ class MessageLogPrinter extends PrettyPrinter {
 
   AnsiColor _getLevelColor(Level level) =>
       colors ? PrettyPrinter.levelColors[level]! : AnsiColor.none();
-
-  AnsiColor _getErrorColor(Level level) => colors
-      ? level == Level.wtf
-          ? PrettyPrinter.levelColors[Level.wtf]!.toBg()
-          : PrettyPrinter.levelColors[Level.error]!.toBg()
-      : AnsiColor.none();
 
   String _getEmoji(Level level) =>
       printEmojis ? PrettyPrinter.levelEmojis[level]! : '';
@@ -107,10 +114,8 @@ class MessageLogPrinter extends PrettyPrinter {
     }
 
     if (error != null) {
-      final errorColor = _getErrorColor(level);
-
       for (final line in error.split('\n')) {
-        buffer.add(errorColor(line));
+        buffer.add(color(line));
       }
 
       if (includeBox[level]!) buffer.add(color(divider));

@@ -12,7 +12,6 @@ export 'package:logger/logger.dart';
 class CodenicLogger {
   /// Creates a logger that appropriately displays information from a
   /// [MessageLog].
-
   CodenicLogger({
     logs.Logger? logger,
   }) : _logger = logger ??

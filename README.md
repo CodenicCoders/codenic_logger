@@ -16,6 +16,7 @@ A logger extension for providing structured and mutable log messages.
 Use this plugin in your app to:
 
 - Structurally create mutable log messages.
+- Initialize log messages early, populate it with data throughout the code execution, then printing them at a later point in time.
 - Log messages on multiple log levels – verbose, debug, info, warning, error and wtf.
 - Automatically add a user ID to all log data upon logging.
 
