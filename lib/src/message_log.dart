@@ -1,6 +1,8 @@
+import 'package:equatable/equatable.dart';
+
 /// A container for log information.
-class MessageLog {
-  /// The default constructor.
+class MessageLog with EquatableMixin {
+  // ignore: public_member_api_docs
   MessageLog({
     required this.id,
     this.message,
@@ -31,7 +33,10 @@ class MessageLog {
 
   /// Returns a formatted string message log.
   @override
-  String toString() => 'identifier: $id'
-      '${message != null ? '\nmessage: $message' : ''}'
-      '${data.isNotEmpty ? '\ndata: $data' : ''}';
+  String toString() => '$id'
+      '${message != null ? ' – $message' : ''}'
+      '${data.isNotEmpty ? ' $data' : ''}';
+
+  @override
+  List<Object?> get props => [id, message, data];
 }

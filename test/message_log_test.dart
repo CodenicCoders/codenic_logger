@@ -76,9 +76,9 @@ void main() {
               // Assert
               expect(
                 str,
-                'identifier: lorep'
-                '\nmessage: ipsum'
-                '\ndata: {arcu: true, dictum: 42}',
+                'lorep'
+                ' – ipsum'
+                ' {arcu: true, dictum: 42}',
               );
             },
           );
@@ -98,8 +98,8 @@ void main() {
               // Assert
               expect(
                 str,
-                'identifier: lorep'
-                '\ndata: {arcu: true, dictum: 42}',
+                'lorep'
+                ' {arcu: true, dictum: 42}',
               );
             },
           );
@@ -119,8 +119,8 @@ void main() {
               // Assert
               expect(
                 str,
-                'identifier: lorep'
-                '\nmessage: ipsum',
+                'lorep'
+                ' – ipsum',
               );
             },
           );

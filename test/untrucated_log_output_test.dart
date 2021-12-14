@@ -8,14 +8,14 @@ class MockPrinter extends Mock {
 
 void main() {
   group(
-    'Extended log output',
+    'Untruncated log output',
     () {
       test(
         'split long texts then print them',
         () {
           // Assign
           final mockPrinter = MockPrinter();
-          final extendedLogOutput = ExtendedLogOutput(
+          final untrancatedLogOutput = UntruncatedLogOutput(
             printer: mockPrinter,
             textLengthLimit: 5,
           );
@@ -26,7 +26,7 @@ void main() {
           );
 
           // Act
-          extendedLogOutput.output(outputEvent);
+          untrancatedLogOutput.output(outputEvent);
 
           // Assert
           verify(() => mockPrinter.call('lorep')).called(1);

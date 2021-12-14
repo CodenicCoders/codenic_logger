@@ -1,9 +1,15 @@
 import 'package:logger/logger.dart';
 
 /// Prints the entire log output without being truncated.
-class ExtendedLogOutput extends LogOutput {
-  /// The default constructor.
-  ExtendedLogOutput({this.textLengthLimit = 800, this.printer});
+///
+/// Some platforms such as Android and IOS truncates long texts displayed via a
+/// single log call. As a solution, the log printing is done in small chunks to
+/// ensure that it gets entirely printed.
+///
+/// See https://github.com/flutter/flutter/issues/22665#issuecomment-496130148
+class UntruncatedLogOutput extends LogOutput {
+  // ignore: public_member_api_docs
+  UntruncatedLogOutput({this.textLengthLimit = 1000, this.printer});
 
   /// The max text length allowed.
   ///

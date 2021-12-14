@@ -16,6 +16,7 @@ A logger extension for providing structured and mutable log messages.
 Use this plugin in your app to:
 
 - Structurally create mutable log messages.
+- Initialize log messages early, populate it with data throughout the code execution, then printing them at a later point in time.
 - Log messages on multiple log levels – verbose, debug, info, warning, error and wtf.
 - Automatically add a user ID to all log data upon logging.
 
@@ -73,8 +74,6 @@ try {
 }
 ```
 
-<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_2.webp?raw=true" alt="Sample detailed log messages" width=640/>
-
 ### Setting a user ID
 
 When a user ID is provided, it will automatically be included in the log data.
@@ -84,7 +83,7 @@ codenicLogger.userId = 'sample-uid';
 codenicLogger.info(messageLog);
 ```
 
-<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_3.webp?raw=true" alt="Sample detailed log messages" width=640/>
+<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_2.webp?raw=true" alt="Sample detailed log messages" width=640/>
 
 To remove the user ID, simply set it back to `null`:
 
