@@ -74,8 +74,6 @@ try {
 }
 ```
 
-<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_2.webp?raw=true" alt="Sample detailed log messages" width=640/>
-
 ### Setting a user ID
 
 When a user ID is provided, it will automatically be included in the log data.
@@ -85,7 +83,7 @@ codenicLogger.userId = 'sample-uid';
 codenicLogger.info(messageLog);
 ```
 
-<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_3.webp?raw=true" alt="Sample detailed log messages" width=640/>
+<img src="https://github.com/CodenicCoders/codenic_logger/blob/master/doc/assets/sample_2.webp?raw=true" alt="Sample detailed log messages" width=640/>
 
 To remove the user ID, simply set it back to `null`:
 
