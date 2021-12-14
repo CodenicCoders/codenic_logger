@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:codenic_logger/codenic_logger.dart';
-import 'package:logger/logger.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
