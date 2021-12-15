@@ -1,6 +1,10 @@
+## 0.5.1
+
+- Export `MessageLogPrinter`
+
 ## 0.5.0
 
-– Create `ModifiedPrettyPrinter` to change default log output
+– Create `MessageLogPrinter` to change default log output
 
 ## 0.4.2
 

@@ -1,5 +1,4 @@
 import 'package:codenic_logger/codenic_logger.dart';
-import 'package:codenic_logger/src/message_log_printer.dart';
 import 'package:test/test.dart';
 
 void main() {

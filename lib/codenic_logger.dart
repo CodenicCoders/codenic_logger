@@ -5,6 +5,7 @@ import 'package:logger/logger.dart' as logs;
 import 'package:meta/meta.dart';
 
 export 'package:codenic_logger/src/message_log.dart';
+export 'package:codenic_logger/src/message_log_printer.dart';
 export 'package:codenic_logger/src/untruncated_log_output.dart';
 export 'package:logger/logger.dart';
 
