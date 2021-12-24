@@ -1,3 +1,7 @@
+## 0.5.2
+
+- Fix printing long log outputs loses color
+
 ## 0.5.1
 
 - Export `MessageLogPrinter`

@@ -1,7 +1,8 @@
 import 'package:codenic_logger/src/message_log.dart';
 import 'package:logger/logger.dart';
 
-/// An adaption of [PrettyPrinter] that displays the content of a [MessageLog].
+/// An adaption of [PrettyPrinter] that displays the content of a [MessageLog]
+/// and prevents long texts from being truncated.
 ///
 /// Output looks like this:
 /// ```
@@ -128,16 +129,25 @@ class MessageLogPrinter extends PrettyPrinter {
       if (includeBox[level]!) buffer.add(color(divider));
     }
 
-    if (messageLog.message != null) {
-      buffer.add(color('${messageLog.message}'));
+    final message = messageLog.message;
+
+    if (message != null) {
+      _splitText(message).forEach((text) => buffer.add(color(text)));
       if (includeBox[level]!) buffer.add(color(divider));
     }
 
     if (messageLog.data.isNotEmpty) {
-      buffer.add(color('${messageLog.data}'));
+      final data = messageLog.data.toString();
+
+      _splitText(data).forEach((text) => buffer.add(color(text)));
+
       if (includeBox[level]!) buffer.add(color(divider));
     }
 
     return buffer;
   }
+
+  /// Flutter truncates
+  Iterable<String> _splitText(String text) =>
+      RegExp('.{1,1023}').allMatches(text).map((e) => e.group(0) ?? '');
 }
