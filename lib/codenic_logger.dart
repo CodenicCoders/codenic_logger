@@ -1,25 +1,19 @@
 import 'package:codenic_logger/src/message_log.dart';
 import 'package:codenic_logger/src/message_log_printer.dart';
-import 'package:codenic_logger/src/untruncated_log_output.dart';
 import 'package:logger/logger.dart' as logs;
 import 'package:meta/meta.dart';
 
 export 'package:codenic_logger/src/message_log.dart';
 export 'package:codenic_logger/src/message_log_printer.dart';
-export 'package:codenic_logger/src/untruncated_log_output.dart';
 export 'package:logger/logger.dart';
 
-/// An extension of [logs.Logger] for providing detailed log messages.
+/// An extension of [logs.Logger] for providing detailed log messages from a
+/// [MessageLog].
 class CodenicLogger {
   /// Creates a logger that appropriately displays information from a
   /// [MessageLog].
-  CodenicLogger({
-    logs.Logger? logger,
-  }) : _logger = logger ??
-            logs.Logger(
-              printer: MessageLogPrinter(),
-              output: UntruncatedLogOutput(),
-            );
+  CodenicLogger({logs.Logger? logger})
+      : _logger = logger ?? logs.Logger(printer: MessageLogPrinter());
 
   /// An instance of the [logger package](https://pub.dev/packages/logger) used
   /// for generating log outputs.

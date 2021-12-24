@@ -5,20 +5,10 @@ final codenicLogger = CodenicLogger();
 void main() {
   // To run, type `dart --enable-asserts example/main.dart`.
 
-  codenicLogger.userId = 'sample-uid';
-
-  codenicLogger.info(
-    MessageLog(
-      id: 'lorep-ipsum',
-      message: 'Data has user ID',
-      data: <String, dynamic>{'minim': 'veniam', 'voluptate': 42},
-    ),
-  );
-
-  // completeLogWithUserId();
-  // updateMessageLog();
-  // logError();
-  // logLevels();
+  completeLogWithUserId();
+  updateMessageLog();
+  logError();
+  logLevels();
 }
 
 void completeLogWithUserId() {
