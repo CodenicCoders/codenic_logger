@@ -7,7 +7,7 @@ export 'package:codenic_logger/src/message_log.dart';
 export 'package:codenic_logger/src/message_log_printer.dart';
 export 'package:logger/logger.dart';
 
-/// An extension of [logs.Logger] for providing detailed log messages from a 
+/// An extension of [logs.Logger] for providing detailed log messages from a
 /// [MessageLog].
 class CodenicLogger {
   /// Creates a logger that appropriately displays information from a
