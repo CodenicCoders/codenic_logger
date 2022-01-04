@@ -1,6 +1,8 @@
 import 'package:codenic_logger/src/message_log.dart';
 import 'package:logger/logger.dart';
 
+/// {@template MessageLogPrinter}
+/// 
 /// An adaption of [PrettyPrinter] that displays the content of a [MessageLog]
 /// and prevents long texts from being truncated.
 ///
@@ -20,8 +22,10 @@ import 'package:logger/logger.dart';
 ///  Data
 /// ──────────────────────────
 /// ```
+/// 
+/// {@endtemplate}
 class MessageLogPrinter extends PrettyPrinter {
-  /// The default constructor.
+  /// {@macro MessageLogPrinter}
   MessageLogPrinter({
     int stackTraceBeginIndex = 0,
     int methodCount = 2,

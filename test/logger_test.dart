@@ -115,14 +115,15 @@ void main() {
             'should log message with user ID',
             () {
               // Assign
-              logger.userId = 'sample-uid';
               final messageLog = MessageLog(
                 id: 'lorep_ipsum',
                 data: <String, dynamic>{'foo': 1},
               );
 
               // Act
-              logger.info(messageLog);
+              logger
+                ..userId = 'sample-uid'
+                ..info(messageLog);
 
               // Assert
               verify(
