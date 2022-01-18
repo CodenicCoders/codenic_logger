@@ -1,8 +1,12 @@
 import 'package:equatable/equatable.dart';
 
+/// {@template MessageLog}
+///
 /// A container for log information.
+///
+/// {@endtemplate}
 class MessageLog with EquatableMixin {
-  // ignore: public_member_api_docs
+  /// {@macro MessageLog}
   MessageLog({
     required this.id,
     this.message,

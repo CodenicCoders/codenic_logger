@@ -1,3 +1,8 @@
+## 0.5.3
+
+- Add docs on constructors
+- Bump `test` from `1.19.5` to `1.20.1`
+
 ## 0.5.2
 
 - Fix printing long log outputs loses color
