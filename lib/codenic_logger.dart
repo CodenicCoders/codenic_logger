@@ -8,10 +8,10 @@ export 'package:codenic_logger/src/message_log_printer.dart';
 export 'package:logger/logger.dart';
 
 /// {@template CodenicLogger}
-/// 
+///
 /// Creates a logger that appropriately displays information from a
 /// [MessageLog].
-/// 
+///
 /// {@endtemplate}
 class CodenicLogger {
   /// {@macro CodenicLogger}
