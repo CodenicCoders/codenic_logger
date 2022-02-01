@@ -1,3 +1,8 @@
+## 0.5.4
+
+- BUG FIX: Stack trace should not show `codenic_logger` file traces in Flutter 
+web
+
 ## 0.5.3
 
 - Add docs on constructors

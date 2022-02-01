@@ -55,7 +55,11 @@ class MessageLogPrinter extends PrettyPrinter {
   @override
   String? formatStackTrace(StackTrace? stackTrace, int methodCount) {
     final stackTraceSplit = stackTrace.toString().split('\n')
-      ..removeWhere((str) => str.contains('package:codenic_logger'));
+      ..removeWhere(
+        (str) =>
+            str.contains('package:codenic_logger') ||
+            str.contains('packages/codenic_logger'),
+      );
 
     final stackTraceSanitizedStr = stackTraceSplit.join('\n');
 
