@@ -1,3 +1,7 @@
+## 0.5.5
+
+- Promote from `dev` to `stable`
+
 ## 0.5.5-dev.1
 
 - BUG FIX: The `MessageLogPrinter` should not throw an exception when used in 
