@@ -1,3 +1,8 @@
+## 0.5.5-dev.1
+
+- BUG FIX: The `MessageLogPrinter` should not throw an exception when used in 
+an `Isolate`
+
 ## 0.5.4
 
 - BUG FIX: Stack trace should not show `codenic_logger` file traces in Flutter 

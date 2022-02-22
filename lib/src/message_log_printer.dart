@@ -1,3 +1,7 @@
+// coverage:ignore-file
+
+import 'dart:isolate';
+
 import 'package:codenic_logger/src/message_log.dart';
 import 'package:logger/logger.dart';
 
@@ -52,6 +56,8 @@ class MessageLogPrinter extends PrettyPrinter {
   /// The printed divider.
   final String divider;
 
+  static final _startTime = DateTime.now();
+
   @override
   String? formatStackTrace(StackTrace? stackTrace, int methodCount) {
     final stackTraceSplit = stackTrace.toString().split('\n')
@@ -67,6 +73,35 @@ class MessageLogPrinter extends PrettyPrinter {
       StackTrace.fromString(stackTraceSanitizedStr),
       methodCount,
     );
+  }
+
+  /// A replacement for [PrettyPrinter.getTime].
+  ///
+  /// The [PrettyPrinter.getTime] throws an [Exception] whenever it is
+  /// called in an [Isolate]. The exception indicates that the
+  /// `static nullable _startTime` of [PrettyPrinter] has not been initialized.
+  /// As a workaround, a non-nullable [_startTime] has been created to
+  /// alleviate the issue.
+  @override
+  String getTime() {
+    String _threeDigits(int n) {
+      if (n >= 100) return '$n';
+      if (n >= 10) return '0$n';
+      return '00$n';
+    }
+
+    String _twoDigits(int n) {
+      if (n >= 10) return '$n';
+      return '0$n';
+    }
+
+    final now = DateTime.now();
+    final h = _twoDigits(now.hour);
+    final min = _twoDigits(now.minute);
+    final sec = _twoDigits(now.second);
+    final ms = _threeDigits(now.millisecond);
+    final timeSinceStart = now.difference(_startTime).toString();
+    return '$h:$min:$sec.$ms (+$timeSinceStart)';
   }
 
   @override
