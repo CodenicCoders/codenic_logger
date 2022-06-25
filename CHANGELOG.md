@@ -1,3 +1,7 @@
+## 0.6.0
+
+– Bump dependencies
+
 ## 0.5.5
 
 - Promote from `dev` to `stable`

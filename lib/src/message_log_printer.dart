@@ -31,27 +31,16 @@ import 'package:logger/logger.dart';
 class MessageLogPrinter extends PrettyPrinter {
   /// {@macro MessageLogPrinter}
   MessageLogPrinter({
-    int stackTraceBeginIndex = 0,
-    int methodCount = 2,
-    int errorMethodCount = 8,
-    int lineLength = 120,
-    bool colors = true,
-    bool printEmojis = true,
-    bool printTime = true,
-    Map<Level, bool> excludeBox = const {},
-    bool noBoxingByDefault = false,
-  })  : divider = '–' * lineLength,
-        super(
-          stackTraceBeginIndex: stackTraceBeginIndex,
-          methodCount: methodCount,
-          errorMethodCount: errorMethodCount,
-          lineLength: lineLength,
-          colors: colors,
-          printEmojis: printEmojis,
-          printTime: printTime,
-          excludeBox: excludeBox,
-          noBoxingByDefault: noBoxingByDefault,
-        );
+    super.stackTraceBeginIndex,
+    super.methodCount,
+    super.errorMethodCount,
+    super.lineLength,
+    super.colors,
+    super.printEmojis,
+    super.printTime = true,
+    super.excludeBox,
+    super.noBoxingByDefault,
+  }) : divider = '–' * lineLength;
 
   /// The printed divider.
   final String divider;
