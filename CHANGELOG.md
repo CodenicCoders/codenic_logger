@@ -1,3 +1,6 @@
+## 1.0.0
+- Modify constructor of `CodenicLogger`
+- Allow blocklisting of stack trace lines via regex
 ## 0.6.1
 - Bump dependencies
 ## 0.6.0

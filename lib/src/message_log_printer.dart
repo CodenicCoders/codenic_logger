@@ -43,6 +43,8 @@ class MessageLogPrinter extends PrettyPrinter {
     this.stackTraceBlocklistRegex,
   });
 
+  /// A regex that matches stack trace lines that should be excluded from the
+  /// output.
   final RegExp? stackTraceBlocklistRegex;
 
   static final _startTime = DateTime.now();
