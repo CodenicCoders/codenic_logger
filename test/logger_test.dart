@@ -44,9 +44,11 @@ void main() {
         },
       );
 
-      final logger = CodenicLogger(printer: callbackPrinter);
+      late CodenicLogger logger;
 
       setUp(() {
+        logger = CodenicLogger(printer: callbackPrinter);
+
         printedLevel = null;
         printedMessage = null;
         printedError = null;

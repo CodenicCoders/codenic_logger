@@ -1,4 +1,7 @@
 ## 1.0.0
+- Major release
+
+## 1.0.0-dev1
 - Modify constructor of `CodenicLogger`
 - Allow blocklisting of stack trace lines via regex
 ## 0.6.1

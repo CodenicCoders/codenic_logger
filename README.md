@@ -74,6 +74,19 @@ try {
 }
 ```
 
+## Blocklisting stack trace line
+
+To prevent a stack trace line from being printed, you can use the `blocklistStackTraceLine` method:
+
+```dart
+// lines with `package:codenic_logger/` will not be printed
+final codenicLogger = CodenicLogger(
+  printer: MessageLogPrinter(
+    stackTraceBlocklistRegex: RegExp('package:codenic_logger/'),
+  ),
+);
+```
+
 ### Setting a user ID
 
 When a user ID is provided, it will automatically be included in the log data.
