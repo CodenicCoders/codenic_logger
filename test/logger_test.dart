@@ -1,32 +1,61 @@
-import 'dart:io';
-
 import 'package:codenic_logger/codenic_logger.dart';
-import 'package:mocktail/mocktail.dart';
 import 'package:test/test.dart';
 
-class MockLogger extends Mock implements Logger {}
+typedef PrinterCallback = List<String> Function(
+  Level level,
+  dynamic message,
+  dynamic error,
+  StackTrace? stackTrace,
+);
 
-class MockPrinter extends Mock {
-  void call(Object? object);
+class CallbackPrinter extends MessageLogPrinter {
+  CallbackPrinter({required this.callback});
+
+  final PrinterCallback callback;
+
+  @override
+  List<String> log(LogEvent event) {
+    return callback(
+      event.level,
+      event.message,
+      event.error,
+      event.stackTrace,
+    );
+  }
 }
 
 void main() {
   group(
     'Logger',
     () {
+      Level? printedLevel;
+      dynamic printedMessage;
+      dynamic printedError;
+      StackTrace? printedStackTrace;
+
+      final callbackPrinter = CallbackPrinter(
+        callback: (level, message, error, stackTrace) {
+          printedLevel = level;
+          printedMessage = message;
+          printedError = error;
+          printedStackTrace = stackTrace;
+
+          return [];
+        },
+      );
+
+      final logger = CodenicLogger(printer: callbackPrinter);
+
+      setUp(() {
+        printedLevel = null;
+        printedMessage = null;
+        printedError = null;
+        printedStackTrace = null;
+      });
+
       group(
         'log levels',
         () {
-          late MockLogger mockLogger;
-          late CodenicLogger logger;
-
-          setUp(
-            () {
-              mockLogger = MockLogger();
-              logger = CodenicLogger(logger: mockLogger);
-            },
-          );
-
           test(
             'should log verbose',
             () {
@@ -37,7 +66,10 @@ void main() {
               logger.verbose(messageLog);
 
               // Assert
-              verify(() => mockLogger.v(messageLog)).called(1);
+              expect(printedLevel, Level.verbose);
+              expect(printedMessage, messageLog);
+              expect(printedError, isNull);
+              expect(printedStackTrace, isNull);
             },
           );
 
@@ -51,7 +83,10 @@ void main() {
               logger.debug(messageLog);
 
               // Assert
-              verify(() => mockLogger.d(messageLog)).called(1);
+              expect(printedLevel, Level.debug);
+              expect(printedMessage, messageLog);
+              expect(printedError, isNull);
+              expect(printedStackTrace, isNull);
             },
           );
 
@@ -65,7 +100,10 @@ void main() {
               logger.info(messageLog);
 
               // Assert
-              verify(() => mockLogger.i(messageLog)).called(1);
+              expect(printedLevel, Level.info);
+              expect(printedMessage, messageLog);
+              expect(printedError, isNull);
+              expect(printedStackTrace, isNull);
             },
           );
 
@@ -79,7 +117,10 @@ void main() {
               logger.warn(messageLog);
 
               // Assert
-              verify(() => mockLogger.w(messageLog)).called(1);
+              expect(printedLevel, Level.warning);
+              expect(printedMessage, messageLog);
+              expect(printedError, isNull);
+              expect(printedStackTrace, isNull);
             },
           );
 
@@ -88,12 +129,16 @@ void main() {
             () {
               // Assign
               final messageLog = MessageLog(id: 'lorep_ipsum');
+              final error = Exception();
 
               // Act
-              logger.error(messageLog);
+              logger.error(messageLog, error: error);
 
               // Assert
-              verify(() => mockLogger.e(messageLog)).called(1);
+              expect(printedLevel, Level.error);
+              expect(printedMessage, messageLog);
+              expect(printedError, error);
+              expect(printedStackTrace, isNull);
             },
           );
 
@@ -107,7 +152,10 @@ void main() {
               logger.wtf(messageLog);
 
               // Assert
-              verify(() => mockLogger.wtf(messageLog)).called(1);
+              expect(printedLevel, Level.wtf);
+              expect(printedMessage, messageLog);
+              expect(printedError, isNull);
+              expect(printedStackTrace, isNull);
             },
           );
 
@@ -126,55 +174,15 @@ void main() {
                 ..info(messageLog);
 
               // Assert
-              verify(
-                () => mockLogger.i(
-                  messageLog.copyWith(
-                    data: <String, dynamic>{
-                      '__uid__': 'sample-uid',
-                      ...messageLog.data
-                    },
-                  ),
+              expect(
+                printedMessage,
+                messageLog.copyWith(
+                  data: <String, dynamic>{
+                    '__uid__': 'sample-uid',
+                    ...messageLog.data
+                  },
                 ),
-              ).called(1);
-            },
-          );
-        },
-      );
-
-      group(
-        'error',
-        () {
-          setUpAll(() {
-            registerFallbackValue(StackTrace.empty);
-          });
-
-          test(
-            'should log exception',
-            () {
-              // Given
-              final mockLogger = MockLogger();
-              final logger = CodenicLogger(logger: mockLogger);
-              final messageLog = MessageLog(id: 'sample');
-
-              // When
-              try {
-                throw const SocketException('no-internet');
-              } catch (exception, stackTrace) {
-                logger.error(
-                  messageLog,
-                  error: exception,
-                  stackTrace: stackTrace,
-                );
-              }
-
-              // Then
-              verify(
-                () => mockLogger.e(
-                  messageLog,
-                  const SocketException('no-internet'),
-                  any<StackTrace>(),
-                ),
-              ).called(1);
+              );
             },
           );
         },

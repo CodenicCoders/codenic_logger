@@ -39,6 +39,8 @@ void updateMessageLog() {
 void logError() {
   final messageLog = MessageLog(id: 'log_error');
 
+  // throw Exception('Test exception');
+
   try {
     throw Exception('Test exception');
   } catch (exception, stackTrace) {

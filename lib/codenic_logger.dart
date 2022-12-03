@@ -1,6 +1,6 @@
 import 'package:codenic_logger/src/message_log.dart';
 import 'package:codenic_logger/src/message_log_printer.dart';
-import 'package:logger/logger.dart' as logs;
+import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 
 export 'package:codenic_logger/src/message_log.dart';
@@ -15,14 +15,23 @@ export 'package:logger/logger.dart';
 /// {@endtemplate}
 class CodenicLogger {
   /// {@macro CodenicLogger}
-  CodenicLogger({logs.Logger? logger})
-      : _logger = logger ?? logs.Logger(printer: MessageLogPrinter());
+  CodenicLogger({
+    MessageLogPrinter? printer,
+    LogFilter? filter,
+    LogOutput? output,
+    Level? level,
+  }) : _logger = Logger(
+          printer: printer ?? MessageLogPrinter(),
+          filter: filter,
+          output: output,
+          level: level,
+        );
 
   /// An instance of the [logger package](https://pub.dev/packages/logger) used
   /// for generating log outputs.
   ///
   /// To customize the log output, provide a custom logger.
-  final logs.Logger _logger;
+  final Logger _logger;
 
   /// Associates the log messages with this user ID.
   String? userId;
@@ -33,7 +42,10 @@ class CodenicLogger {
   MessageLog _tryAppendUserIdToMessageLog(MessageLog messageLog) =>
       userId != null
           ? messageLog.copyWith(
-              data: <String, dynamic>{'__uid__': userId, ...messageLog.data},
+              data: <String, dynamic>{
+                '__uid__': userId,
+                ...messageLog.data,
+              },
             )
           : messageLog;
 

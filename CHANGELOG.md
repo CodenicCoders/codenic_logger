@@ -1,3 +1,5 @@
+## 0.6.1
+- Bump dependencies
 ## 0.6.0
 
 – Bump dependencies
