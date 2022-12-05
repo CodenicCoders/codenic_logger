@@ -43,8 +43,9 @@ This section has examples of code for the following tasks:
 - [Logging with different log levels](#logging-with-different-log-levels)
 - [Logging an exception](#logging-an-exception)
 - [Setting a user ID](#setting-a-user-id)
-  – [Adding log data](#adding-log-data)
-- [Customizing the logger](#customizing-the-log-output)
+- [Updating message log properties](#updating-message-log-properties)
+- [Customizing the logger](#customizing-the-logger)
+- [Blocklisting stack trace line](#blocklisting-stack-trace-line)
 - [Sample Integration: Firebase Crashlytics](#sample-integration-firebase-crashlytics)
 
 ### Logging with different log levels
@@ -73,20 +74,6 @@ try {
   codenicLogger.error(messageLog, error: exception, stackTrace: stackTrace);
 }
 ```
-
-## Blocklisting stack trace line
-
-To prevent a stack trace line from being printed, you can use the `blocklistStackTraceLine` method:
-
-```dart
-// lines with `package:codenic_logger/` will not be printed
-final codenicLogger = CodenicLogger(
-  printer: MessageLogPrinter(
-    stackTraceBlocklistRegex: RegExp('package:codenic_logger/'),
-  ),
-);
-```
-
 ### Setting a user ID
 
 When a user ID is provided, it will automatically be included in the log data.
@@ -116,7 +103,7 @@ messageLog
 codenicLogger.verbose(messageLog);
 ```
 
-### Customizing the log output
+### Customizing the logger
 
 To customize the log output, provide a custom [logger](https://github.com/leisim/logger) instance:
 
@@ -136,6 +123,19 @@ final codenicLogger = CodenicLogger(logger: logger);
 ```
 
 For more info, visit the [logger](https://github.com/leisim/logger) package.
+
+### Blocklisting stack trace line
+
+To prevent a stack trace line from being printed, you can use the `blocklistStackTraceLine` method:
+
+```dart
+// lines with `package:codenic_logger/` will not be printed
+final codenicLogger = CodenicLogger(
+  printer: MessageLogPrinter(
+    stackTraceBlocklistRegex: RegExp('package:codenic_logger/'),
+  ),
+);
+```
 
 ### Sample Integration: Firebase Crashlytics
 
